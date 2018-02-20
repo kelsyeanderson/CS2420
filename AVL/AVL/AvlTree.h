@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream> 
 #include <cassert>
+#include <limits>
 
 
 // AvlTree class
@@ -110,7 +111,7 @@ public:
 		if (isEmpty())
 			std::cout << "Empty tree" << std::endl;
 		else
-			printTree(root);
+			toString(root, " ", 0);
 	}
 
 	/**
@@ -144,6 +145,13 @@ public:
 	{
 		remove(x, root);
 	}
+    
+    //----------------my code -------------------------------------------
+    /*calls the helper function to remove the smallest element in the tree and rebalance the tree*/
+    void removeMin()
+    {
+        removeMin(root);
+    }
 
 private:
 	struct AvlNode
@@ -248,8 +256,9 @@ private:
 			if (height(t->right) - height(t->left) > ALLOWED_IMBALANCE)
 				if (height(t->right->right) >= height(t->right->left))
 					rotateWithRightChild(t);
-				else
+				else{
 					doubleWithRightChild(t);
+                }
 
 		t->height = max(height(t->left), height(t->right)) + 1;
 	}
@@ -314,47 +323,48 @@ private:
 	/**
 	* Internal method to make subtree empty.
 	*/
-	void makeEmpty(AvlNode * & t)
+	void makeEmpty(AvlNode * & ptr)
 	{
-		if (t != nullptr)
+		if (ptr != nullptr)
 		{
-			makeEmpty(t->left);
-			makeEmpty(t->right);
-			delete t;
+			makeEmpty(ptr->left);
+			makeEmpty(ptr->right);
+			delete ptr;
 		}
-		t = nullptr;
+		ptr = nullptr;
 	}
 
 	/**
 	* Internal method to print a subtree rooted at t in sorted order.
 	*/
-	void printTree(AvlNode *t) const
+	void toString(AvlNode * ptr, std::string indent, int currdepth, int depth = std::numeric_limits<int>::max()) const
 	{
-		if (t != nullptr)
+        
+		if (ptr != nullptr || currdepth>depth)
 		{
-			printTree(t->left);
-			std::cout  << t->element << " ";
-			printTree(t->right);
+			toString(ptr->right, indent + "  ", currdepth + 1, depth);
+			std::cout << indent << ptr->element << std::endl;
+			toString(ptr->left, indent + "  ", currdepth + 1, depth);
 		}
 	}
 
 	/**
 	* Internal method to clone subtree.
 	*/
-	AvlNode * clone(AvlNode *t) const
+	AvlNode * clone(AvlNode * ptr) const
 	{
-		if (t == nullptr)
+		if (ptr == nullptr)
 			return nullptr;
 		else
-			return new AvlNode{ t->element, clone(t->left), clone(t->right), t->height };
+			return new AvlNode{ ptr->element, clone(ptr->left), clone(ptr->right), ptr->height };
 	}
 	// Avl manipulations
 	/**
 	* Return the height of node t or -1 if nullptr.
 	*/
-	int height(AvlNode *t) const
+	int height(AvlNode * ptr) const
 	{
-		return t == nullptr ? -1 : t->height;
+		return ptr == nullptr ? -1 : ptr->height;
 	}
 
 	int max(int lhs, int rhs) const
@@ -367,14 +377,14 @@ private:
 	* For AVL trees, this is a single rotation for case 1.
 	* Update heights, then set new root.
 	*/
-	void rotateWithLeftChild(AvlNode * & k2)
+	void rotateWithLeftChild(AvlNode * & parent)
 	{
-		AvlNode *k1 = k2->left;
-		k2->left = k1->right;
-		k1->right = k2;
-		k2->height = max(height(k2->left), height(k2->right)) + 1;
-		k1->height = max(height(k1->left), k2->height) + 1;
-		k2 = k1;
+		AvlNode *temp = parent->left;
+		parent->left = temp->right;
+		temp->right = parent;
+		parent->height = max(height(parent->left), height(parent->right)) + 1;
+		temp->height = max(height(temp->left), parent->height) + 1;
+		parent = temp;
 	}
 
 	/**
@@ -382,14 +392,14 @@ private:
 	* For AVL trees, this is a single rotation for case 4.
 	* Update heights, then set new root.
 	*/
-	void rotateWithRightChild(AvlNode * & k1)
+	void rotateWithRightChild(AvlNode * & parent)
 	{
-		AvlNode *k2 = k1->right;
-		k1->right = k2->left;
-		k2->left = k1;
-		k1->height = max(height(k1->left), height(k1->right)) + 1;
-		k2->height = max(height(k2->right), k1->height) + 1;
-		k1 = k2;
+		AvlNode *temp = parent->right;
+		parent->right = temp->left;
+		temp->left = parent;
+		parent->height = max(height(parent->left), height(parent->right)) + 1;
+		temp->height = max(height(temp->right), parent->height) + 1;
+		parent = temp;
 	}
 
 	/**
@@ -398,10 +408,10 @@ private:
 	* For AVL trees, this is a double rotation for case 2.
 	* Update heights, then set new root.
 	*/
-	void doubleWithLeftChild(AvlNode * & k3)
+	void doubleWithLeftChild(AvlNode * & parent)
 	{
-		rotateWithRightChild(k3->left);
-		rotateWithLeftChild(k3);
+		rotateWithRightChild(parent->left);
+		rotateWithLeftChild(parent);
 	}
 
 	/**
@@ -410,11 +420,32 @@ private:
 	* For AVL trees, this is a double rotation for case 3.
 	* Update heights, then set new root.
 	*/
-	void doubleWithRightChild(AvlNode * & k1)
+	void doubleWithRightChild(AvlNode * & parent)
 	{
-		rotateWithLeftChild(k1->right);
-		rotateWithRightChild(k1);
+		rotateWithLeftChild(parent->right);
+		rotateWithRightChild(parent);
 	}
+    
+    //--------------------mycode-----------------------
+    void removeMin(AvlNode* root)
+    {
+        if(root == nullptr)
+        {
+            return;
+        }
+        
+        AvlNode* min = findMin(root);
+        if (min != nullptr)
+        {
+            remove(min->element);
+        }
+        
+    }
+    
 };
+
+
+
+
 
 #endif
