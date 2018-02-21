@@ -6,6 +6,8 @@
 #include <iostream> 
 #include <cassert>
 #include <limits>
+#include "Board.h"
+#include "List.hpp"
 
 
 // AvlTree class
@@ -166,7 +168,6 @@ private:
 
 		AvlNode(Comparable && ele, AvlNode *lt, AvlNode *rt, int h = 0)
 			: element{ std::move(ele) }, left{ lt }, right{ rt }, height{ h } { }
-	};
 
 	AvlNode *root;
 
