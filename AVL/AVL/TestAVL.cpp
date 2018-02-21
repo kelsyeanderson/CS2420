@@ -87,6 +87,9 @@ int main()
     input1.inputBoard("input1.txt");
     input2.inputBoard("input2.txt");
     
+    Board test;
+    test.makeBoard(3);
+    solvePuzzle(input1);
     
     
     
@@ -103,8 +106,44 @@ void solvePuzzle(Board inputBoard)
     AvlTree<GameState> puzzleTree;
     Board solution;
     
-    GameState fixMe(inputBoard, "");
+    if(solution == inputBoard)
+    {
+        std::cout << "Your board was already sorted!!" << std::endl << inputBoard.toString() << std::endl;
+    }
+    
+    GameState fixMe(inputBoard, "", 0, 0);
     puzzleTree.insert(fixMe);
+    
+    bool found = false;
+    int numBoards = 0;
+    
+    while(!found)
+    {
+        GameState check = puzzleTree.removeMin();
+        numBoards++;
+        std::cout << std::endl << "Board ID:" << check.m_self << ", Parent ID:" << check.m_parent;
+        std::cout << ", History" << check.m_memory << " (" << check.m_numMoves << "):[";
+        std::cout<< check.m_priority << "]" << std::endl;
+        std::cout << check.m_board.toString();
+        std::cout << std::endl << "removed " << numBoards << " states" << std::endl;
+        if(check.m_board == solution)
+        {
+            found = true;
+        }
+        else
+        {
+            for(int i = 0; i < 12; i++)
+            {
+                GameState temp(check.m_board, check.m_memory, check.m_self, i);
+                temp.m_memory += temp.m_board.move(i);
+                GameState newTemp(temp.m_board, temp.m_memory, temp.m_parent, temp.m_self);
+                puzzleTree.insert(newTemp);
+            }
+        }
+        
+        
+    }
+    
     
     
     

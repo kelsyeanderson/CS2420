@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7A1BCC1D203CCD5F0019EF38 /* TestAVL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC1B203CCD5F0019EF38 /* TestAVL.cpp */; };
 		7A1BCC23203CEAAA0019EF38 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC1E203CEAAA0019EF38 /* Board.cpp */; };
-		7A1BCC25203CEAAA0019EF38 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC21203CEAAA0019EF38 /* main.cpp */; };
 		7A1BCC28203CF87D0019EF38 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC26203CF87D0019EF38 /* GameState.cpp */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +30,6 @@
 		7A1BCC1C203CCD5F0019EF38 /* AvlTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvlTree.h; sourceTree = "<group>"; };
 		7A1BCC1E203CEAAA0019EF38 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		7A1BCC1F203CEAAA0019EF38 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
-		7A1BCC21203CEAAA0019EF38 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7A1BCC26203CF87D0019EF38 /* GameState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
 		7A1BCC27203CF87D0019EF38 /* GameState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +69,6 @@
 				7A1BCC26203CF87D0019EF38 /* GameState.cpp */,
 				7A1BCC1E203CEAAA0019EF38 /* Board.cpp */,
 				7A1BCC1F203CEAAA0019EF38 /* Board.h */,
-				7A1BCC21203CEAAA0019EF38 /* main.cpp */,
 				7A1BCC1B203CCD5F0019EF38 /* TestAVL.cpp */,
 			);
 			path = AVL;
@@ -136,7 +133,6 @@
 			files = (
 				7A1BCC28203CF87D0019EF38 /* GameState.cpp in Sources */,
 				7A1BCC23203CEAAA0019EF38 /* Board.cpp in Sources */,
-				7A1BCC25203CEAAA0019EF38 /* main.cpp in Sources */,
 				7A1BCC1D203CCD5F0019EF38 /* TestAVL.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

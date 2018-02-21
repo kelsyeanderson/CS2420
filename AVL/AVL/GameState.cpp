@@ -22,7 +22,7 @@ int GameState::setCost(Board data)
             {
                 count++;
             }
-            if((data.board[i][j]%3 != j))
+            if((data.board[i][j]-1)%3 != j)
             {
                 count++;
             }
@@ -36,4 +36,9 @@ void GameState::incMoves()
 {
     m_numMoves++;
     m_priority++;
+}
+
+std::ostream&  operator<<(std::ostream& ss, const GameState& gs) {
+    ss << gs.m_board.toString() << std::endl;
+    return ss;
 }

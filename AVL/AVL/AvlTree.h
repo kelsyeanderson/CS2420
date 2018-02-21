@@ -7,6 +7,7 @@
 #include <cassert>
 #include <limits>
 #include "Board.h"
+#include "GameState.hpp"
 
 
 // AvlTree class
@@ -147,13 +148,24 @@ public:
 		remove(x, root);
 	}
     
-    //----------------my code -------------------------------------------
-    /*calls the helper function to remove the smallest element in the tree and rebalance the tree*/
-    void removeMin()
+    //--------------------mycode-----------------------
+    /*removes the smallest element in the tree and then balances it out again*/
+    AvlNode* removeMin()
     {
-        removeMin(root);
+        if(root == nullptr)
+        {
+            return nullptr;
+        }
+        
+        AvlNode* min = findMin(root);
+        if (min != nullptr)
+        {
+            remove(min->element);
+        }
+        return min;
+        
     }
-
+    
 private:
 	struct AvlNode
 	{
@@ -180,7 +192,7 @@ private:
 	*/
 	void insert(const Comparable & x, AvlNode * & t)
 	{
-		std::cout << "insert &" << x << std::endl;
+		//std::cout << "insert &" << x << std::endl;
 		if (t == nullptr)
 			t = new AvlNode{ x, nullptr, nullptr };
 		else if (x <= t->element)
@@ -427,25 +439,8 @@ private:
 		rotateWithRightChild(parent);
 	}
     
-    //--------------------mycode-----------------------
-    void removeMin(AvlNode* root)
-    {
-        if(root == nullptr)
-        {
-            return;
-        }
-        
-        AvlNode* min = findMin(root);
-        if (min != nullptr)
-        {
-            remove(min->element);
-        }
-        
-    }
     
 };
-
-
 
 
 
