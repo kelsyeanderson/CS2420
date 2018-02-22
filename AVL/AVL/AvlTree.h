@@ -150,21 +150,13 @@ public:
     
     //--------------------mycode-----------------------
     /*removes the smallest element in the tree and then balances it out again*/
-    AvlNode* removeMin()
+    Comparable removeMin()
     {
-        if(root == nullptr)
-        {
-            return nullptr;
-        }
-        
-        AvlNode* min = findMin(root);
-        if (min != nullptr)
-        {
-            remove(min->element);
-        }
-        return min;
-        
+        assert(root != nullptr);
+        return removeMin(root);
     }
+    
+    
     
 private:
 	struct AvlNode
@@ -211,7 +203,7 @@ private:
 	*/
 	void insert(Comparable && x, AvlNode * & t)
 	{
-		std::cout << "insert &&" << x << std::endl;
+		//std::cout << "insert &&" << x << std::endl;
 		if (t == nullptr)
 			t = new AvlNode{ std::move(x), nullptr, nullptr };
 		else if (x <= t->element)
@@ -439,6 +431,35 @@ private:
 		rotateWithRightChild(parent);
 	}
     
+    Comparable removeMin(AvlNode* &ptr, AvlNode* parent = NULL)
+    {
+        if(ptr->left == nullptr)
+        {
+            if(ptr->right != nullptr)
+            {
+                Comparable temp = ptr->element;
+                ptr = ptr->right;
+                if(parent != nullptr)
+                {
+                    balance(parent);
+                }
+                return temp;
+            }
+            else
+            {
+                Comparable temp = ptr->element;
+                ptr = nullptr;
+                delete ptr;
+                if(parent != nullptr)
+                {
+                    parent->left = nullptr;
+                    balance(parent);
+                }
+                return temp;
+            }
+        }
+        return removeMin(ptr->left, ptr);
+    }
     
 };
 
