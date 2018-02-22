@@ -10,7 +10,8 @@
 #include "Board.h"
 #include <string>
 
-
+/*Goes throught the inputed board and (under) estimates how many moves
+ are needed to solve the board. Outputs the cost*/
 int GameState::setCost(Board data)
 {
     int count = 0;
@@ -30,12 +31,6 @@ int GameState::setCost(Board data)
     }
     count /= 3;
     return count;
-}
-
-void GameState::incMoves()
-{
-    m_numMoves++;
-    m_priority++;
 }
 
 std::ostream&  operator<<(std::ostream& ss, const GameState& gs) {

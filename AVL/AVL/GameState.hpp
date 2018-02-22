@@ -23,6 +23,7 @@ public:
     int m_parent;
     int m_self;
     
+    /*overloads the operators for << <= >= < > and == so it will work with GameStates*/
     friend std::ostream&  operator<<( std::ostream& ss, const GameState& gs);
     friend bool operator<=(const GameState& rhs, const GameState& lhs)
     {
@@ -45,7 +46,7 @@ public:
         return rhs.m_priority == lhs.m_priority;
     }
     
-    //sets the node based on input information
+    //sets the GameState based on input information
     GameState(Board data, std::string memory, int parent, int self)
     {
         m_board = data;
@@ -57,10 +58,7 @@ public:
         m_priority = m_cost + m_numMoves;
     }
     
-    
     int setCost(Board data);
-    void incMoves();
-
     
 };
 

@@ -149,7 +149,7 @@ public:
 	}
     
     //--------------------mycode-----------------------
-    /*removes the smallest element in the tree and then balances it out again*/
+    /*makes sure the root is not nullptr and then calls the helper function removeMin*/
     Comparable removeMin()
     {
         assert(root != nullptr);
@@ -261,7 +261,8 @@ private:
 			if (height(t->right) - height(t->left) > ALLOWED_IMBALANCE)
 				if (height(t->right->right) >= height(t->right->left))
 					rotateWithRightChild(t);
-				else{
+				else
+                {
 					doubleWithRightChild(t);
                 }
 
@@ -431,6 +432,9 @@ private:
 		rotateWithRightChild(parent);
 	}
     
+    //--------------------mycode-----------------------
+    /*finds the smallest comparable and removes it from the tree. Outputs the
+     smallest comparable*/
     Comparable removeMin(AvlNode* &ptr, AvlNode* parent = NULL)
     {
         if(ptr->left == nullptr)

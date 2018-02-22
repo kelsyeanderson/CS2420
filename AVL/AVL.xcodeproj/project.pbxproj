@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A1BCC1D203CCD5F0019EF38 /* TestAVL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC1B203CCD5F0019EF38 /* TestAVL.cpp */; };
 		7A1BCC23203CEAAA0019EF38 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC1E203CEAAA0019EF38 /* Board.cpp */; };
 		7A1BCC28203CF87D0019EF38 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BCC26203CF87D0019EF38 /* GameState.cpp */; };
 		7AD867E4203E6B0F0084B521 /* RotationGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AD867E3203E6B0F0084B521 /* RotationGame.cpp */; };
@@ -28,7 +27,6 @@
 
 /* Begin PBXFileReference section */
 		7A1BCC11203CCD330019EF38 /* AVL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AVL; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A1BCC1B203CCD5F0019EF38 /* TestAVL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestAVL.cpp; sourceTree = "<group>"; };
 		7A1BCC1C203CCD5F0019EF38 /* AvlTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvlTree.h; sourceTree = "<group>"; };
 		7A1BCC1E203CEAAA0019EF38 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		7A1BCC1F203CEAAA0019EF38 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 				7A1BCC26203CF87D0019EF38 /* GameState.cpp */,
 				7A1BCC1E203CEAAA0019EF38 /* Board.cpp */,
 				7A1BCC1F203CEAAA0019EF38 /* Board.h */,
-				7A1BCC1B203CCD5F0019EF38 /* TestAVL.cpp */,
 				7AD867E5203E6BB50084B521 /* List.cpp */,
 				7AD867E7203E6BB50084B521 /* List.hpp */,
 				7AD867E3203E6B0F0084B521 /* RotationGame.cpp */,
@@ -141,7 +138,6 @@
 			files = (
 				7A1BCC28203CF87D0019EF38 /* GameState.cpp in Sources */,
 				7A1BCC23203CEAAA0019EF38 /* Board.cpp in Sources */,
-				7A1BCC1D203CCD5F0019EF38 /* TestAVL.cpp in Sources */,
 				7AD867E4203E6B0F0084B521 /* RotationGame.cpp in Sources */,
 				7AD867E8203E6BB60084B521 /* List.cpp in Sources */,
 			);
