@@ -24,19 +24,19 @@ int main()
     input2.inputBoard("input2.txt");
     example.makeBoard(90);
     
-    std::cout << "\n\nInput 0";
+    std::cout << "Input 0";
     aStarSolve(input0);
     bruteForceSolve(input0);
     
-    std::cout << "\n\nInput 1";
+    std::cout << "\n\n\n\nInput 1";
     aStarSolve(input1);
     bruteForceSolve(input1);
     
-    std::cout << "\n\nInput 2";
+    std::cout << "\n\n\n\nInput 2";
     aStarSolve(input2);
     bruteForceSolve(input2);
     
-    std::cout << "\n\nExample";
+    std::cout << "\n\n\n\nExample";
     aStarSolve(example);
     bruteForceSolve(example);
     
