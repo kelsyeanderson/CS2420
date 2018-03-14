@@ -11,43 +11,49 @@
 #include "FirstWordInfo.hpp"
 #include "HashTable.h"
 
-ifstream inputFile();
+ifstream inputFile(std::string txtName);
 void clean(std::string & nextToken);
 void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem);
 void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord);
 void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+void printClown(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+void printInch(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+void printPoe(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+void printSeuss(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+
 
 int main()
 {
-    HashTable<std::string, FirstWordInfo> Poem;
-    vector<std::string> computerWrittenPoem;
-    std::string firstWord = "go";
-    int length = 20;
+    HashTable<std::string, FirstWordInfo> GreenPoem;
+    vector<std::string> computerGreenPoem;
+    printGreen(GreenPoem, computerGreenPoem);
     
-    toHash(inputFile(), Poem);
-    generatePoem(Poem, computerWrittenPoem, length, firstWord);
-    for(int i = 0; i < computerWrittenPoem.size(); i++)
-    {
-        std::cout << computerWrittenPoem[i] << " ";
-    }
-    std::cout << std::endl;
+    HashTable<std::string, FirstWordInfo> ClownPoem;
+    vector<std::string> computerClownPoem;
+    printClown(ClownPoem, computerClownPoem);
     
-    //std::cout << Poem.toString() <<std::endl;
+    HashTable<std::string, FirstWordInfo> InchPoem;
+    vector<std::string> computerInchPoem;
+    printInch(InchPoem, computerInchPoem);
     
+    
+    HashTable<std::string, FirstWordInfo> PoePoem;
+    vector<std::string> computerPoePoem;
+    printPoe(PoePoem, computerPoePoem);
+    
+    HashTable<std::string, FirstWordInfo> SeussPoem;
+    vector<std::string> computerSeussPoem;
+    printSeuss(SeussPoem, computerSeussPoem);
+    
+
     return 0;
 }
 
-
-
-
 /*Creates an ifstream from the inputed txt name and verifies that it opens correctly*/
-ifstream inputFile()
+ifstream inputFile(std::string txtName)
 {
-    std::string txt;
-    std::cout << "File Name: ";
-    cin >> txt;
     ifstream inFile;
-    inFile.open(txt);
+    inFile.open(txtName);
     if (!inFile)
     {
         std::cout << "File not found :(" << std::endl;
@@ -139,6 +145,71 @@ void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::strin
         std::cout << inputWord << " ";
     }
     std::cout << std::endl;
+}
+
+
+/*---------------------------Print-Functions----------------------------------------*/
+
+void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+{
+    std::string txtName = "green.txt";
+    std::cout << txtName << std::endl;
+    std::cout << "------------------------\n\n";
+    std::string firstWord = "sam";
+    int length = 20;
+    
+    toHash(inputFile(txtName), Poem);
+    std::cout << Poem.toString() <<std::endl;
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
+}
+
+void printClown(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+{
+    std::string txtName = "clown.txt";
+    std::cout << "\n\n------------------------\n" << txtName << std::endl;
+    std::cout << "------------------------\n\n";
+    std::string firstWord = "go";
+    int length = 20;
+    
+    toHash(inputFile(txtName), Poem);
+    std::cout << Poem.toString() <<std::endl;
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
+}
+
+void printInch(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+{
+    std::string txtName = "inch.txt";
+    std::cout << "\n\n------------------------\n" << txtName << std::endl;
+    std::cout << "------------------------\n\n";
+    std::string firstWord = "computer";
+    int length = 50;
+    
+    toHash(inputFile(txtName), Poem);
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
+}
+
+void printPoe(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+{
+    std::string txtName = "poe.txt";
+    std::cout << "\n\n------------------------\n" << txtName << std::endl;
+    std::cout << "------------------------\n\n";
+    std::string firstWord = "nevermore";
+    int length = 50;
+    
+    toHash(inputFile(txtName), Poem);
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
+}
+
+void printSeuss(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+{
+    std::string txtName = "seuss.txt";
+    std::cout << "\n\n------------------------\n" << txtName << std::endl;
+    std::cout << "------------------------\n\n";
+    std::string firstWord = "mordecai";
+    int length = 50;
+    
+    toHash(inputFile(txtName), Poem);
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
 }
 
 
