@@ -19,7 +19,10 @@ class FirstWordInfo
     int m_count;
 public:
     std::vector<FollowingWordInfo> secondWordList;
-    std::string toString();
+    std::string toString()
+    {
+        return m_word;
+    };
     FirstWordInfo(std::string s, int c = 1)
     {
         m_word = s;
@@ -32,10 +35,11 @@ public:
 /*Checks secondWordList to see if w is in there. If it is, it increments that word's count. If it is not in there it creates a FollowingWordInfo and pushes it onto the list*/
 void FirstWordInfo::updateList(std::string w)
 {
+    std::cout << "in undate list" << std::endl;
     bool found = false;
     int count = 0;
-    int pos = NULL;
-    while(!found || count < secondWordList.size())
+    int pos = -1;
+    while(!found && count < secondWordList.size())
     {
         if (secondWordList[count].m_word == w)
         {
@@ -48,7 +52,7 @@ void FirstWordInfo::updateList(std::string w)
         }
     }
     
-    if (pos != NULL)
+    if (pos != -1)
     {
         secondWordList[pos].increment();
     }
@@ -57,6 +61,7 @@ void FirstWordInfo::updateList(std::string w)
         FollowingWordInfo temp(w);
         secondWordList.push_back(temp);
     }
+    std::cout << "leaving update list" << std::endl;
 }
 
 
