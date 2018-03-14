@@ -26,7 +26,8 @@ public:
         m_count = c;
     };
     void updateList(std::string w);
-    void incrementCount(){ m_count++;}
+    void incrementCount(){ m_count++;};
+    int getCount(){return m_count;};
 };
 
 /*Checks secondWordList to see if w is in there. If it is, it increments that word's count. If it is not in there it creates a FollowingWordInfo and pushes it onto the list*/

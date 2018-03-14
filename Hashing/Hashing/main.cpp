@@ -11,11 +11,14 @@
 
 ifstream inputFile();
 void clean(std::string & nextToken);
-void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem);
+void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem);
+void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string> poem, int size, std::string firstWord);
+bool frequency(HashTable<std::string, FirstWordInfo> Stats, FirstWordInfo* firstWord);
 
 int main()
 {
     HashTable<std::string, FirstWordInfo> Poem;
+    vector<std::string> computerWrittenPoem;
     toHash(inputFile(), Poem);
     
     return 0;
@@ -57,7 +60,7 @@ void clean(std::string & nextToken)
 
 /*Puts the words from inFile into a hash table. Adds the next word into the vector for FirstWordInfo and increments
  the count*/
-void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem)
+void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem)
 {
     std::string initializer;
     inFile >> initializer;
@@ -95,6 +98,26 @@ void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem)
     std::cout << Poem.toString() <<std::endl;
 }
 
+
+void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord)
+{
+    poem.push_back(firstWord);
+    FirstWordInfo* word = Stats.find(firstWord);
+    
+    for(int i = 0; i < size; i++)
+    {
+        int num = word->getCount();
+        
+        int count = 0;
+        while(num > 0)
+        {
+            num -= word->secondWordList[count].m_count;
+            count++;
+        }
+        poem.push_back(word->secondWordList[count].m_word);
+        word = Stats.find(word->secondWordList[count].m_word);
+    }
+}
 
 
 
