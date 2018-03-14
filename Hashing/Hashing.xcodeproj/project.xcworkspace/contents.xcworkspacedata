@@ -2,6 +2,27 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Hashing/clown.txt">
+   </FileRef>
+   <FileRef
+      location = "group:../Hashing/green.txt">
+   </FileRef>
+   <FileRef
+      location = "group:../Hashing/HashTable.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Hashing/Hashing/HashTable.h">
+   </FileRef>
+   <FileRef
+      location = "group:../Hashing/inch.txt">
+   </FileRef>
+   <FileRef
+      location = "group:../Hashing/Poe.txt">
+   </FileRef>
+   <FileRef
+      location = "group:../Hashing/Seuss.txt">
+   </FileRef>
+   <FileRef
       location = "self:Hashing.xcodeproj">
    </FileRef>
 </Workspace>

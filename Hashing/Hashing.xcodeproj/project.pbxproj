@@ -6,6 +6,11 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7A8B8C78205890E400839E41 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A8B8C77205890E400839E41 /* main.cpp */; };
+		7ADB19B2204E23E700CDAFB6 /* HashTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB19B1204E23E700CDAFB6 /* HashTable.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		7ADB19A5204E231500CDAFB6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -19,7 +24,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A8B8C722058904D00839E41 /* FollowingWordInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FollowingWordInfo.hpp; sourceTree = "<group>"; };
+		7A8B8C752058908200839E41 /* FirstWordInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirstWordInfo.hpp; sourceTree = "<group>"; };
+		7A8B8C77205890E400839E41 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		7ADB19A7204E231500CDAFB6 /* Hashing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Hashing; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ADB19B1204E23E700CDAFB6 /* HashTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HashTable.cpp; sourceTree = "<group>"; };
+		7ADB19B3204E23E900CDAFB6 /* HashTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HashTable.h; path = /Users/kelsyeanderson/Desktop/Github/CS2420/Hashing/Hashing/HashTable.h; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,11 @@
 		7ADB19A9204E231500CDAFB6 /* Hashing */ = {
 			isa = PBXGroup;
 			children = (
+				7A8B8C77205890E400839E41 /* main.cpp */,
+				7A8B8C752058908200839E41 /* FirstWordInfo.hpp */,
+				7A8B8C722058904D00839E41 /* FollowingWordInfo.hpp */,
+				7ADB19B3204E23E900CDAFB6 /* HashTable.h */,
+				7ADB19B1204E23E700CDAFB6 /* HashTable.cpp */,
 			);
 			path = Hashing;
 			sourceTree = "<group>";
@@ -113,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A8B8C78205890E400839E41 /* main.cpp in Sources */,
+				7ADB19B2204E23E700CDAFB6 /* HashTable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
