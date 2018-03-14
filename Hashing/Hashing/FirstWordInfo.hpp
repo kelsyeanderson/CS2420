@@ -15,9 +15,9 @@
 
 class FirstWordInfo
 {
+public:
     std::string m_word;
     int m_count;
-public:
     std::vector<FollowingWordInfo> secondWordList;
     std::string toString();
     FirstWordInfo(std::string s, int c = 1)

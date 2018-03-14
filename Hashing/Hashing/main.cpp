@@ -118,6 +118,7 @@ void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem)
 /*Creates a poem based on the previously made Hash Table. couts words while inputting into poem vector*/
 void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord)
 {
+    srand(time(0));
     FirstWordInfo* word = Stats.find(firstWord);
     if(word == nullptr)
     {
@@ -130,7 +131,6 @@ void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::strin
     for(int i = 0; i < size - 1; i++)
     {
         int wordCount = word->getCount();
-        srand(time(NULL));
         int num = (rand() % wordCount) + 1;
         
         int count = -1;

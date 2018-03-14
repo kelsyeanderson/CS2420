@@ -74,26 +74,17 @@ std::string HashTable<HashKey, HashRecord>::toString(int howMany)
 template <typename HashKey, typename HashRecord>
 int HashTable<HashKey, HashRecord>::findPos(const HashKey & x) const
 {
-	int offset = 1;
-	size_t currentPos = myhash(x);
-
-	if (hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
+    int offset = mySecondHash(x);
+    size_t currentPos = myhash(x);
+    
+    while(hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
     {
-        currentPos = mySecondHash(x);
-        if(hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
+        currentPos += offset;  // Compute ith probe
+        if (currentPos >= (int)hashTable.size())    // Cheaper than  mod
         {
-            while(hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
-            {
-                currentPos += offset;  // Compute ith probe
-                offset += 2;
-                if (currentPos >= (int)hashTable.size())    // Cheaper than  mod
-                {
-                     currentPos -= hashTable.size();
-                }
-            }
+            currentPos -= hashTable.size();
         }
     }
-	
 	return currentPos;
 };
 
