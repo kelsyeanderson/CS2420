@@ -17,7 +17,7 @@ class FollowingWordInfo
 public:
     std::string m_word;
     int m_count;
-    std::string toString() {return m_word;};
+    std::string toString();
     FollowingWordInfo(std::string s, int c = 1)
     {
         m_word = s;
@@ -25,5 +25,11 @@ public:
     };
     void increment() {m_count++;}
 };
+
+std::string FollowingWordInfo::toString()
+{
+    return m_word + "(" + std::to_string(m_count) + ")";
+}
+
 
 #endif /* FollowingWordInfo_hpp */

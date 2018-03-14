@@ -48,6 +48,7 @@ private:
 	int activeElements;
 	bool isActive(int currentPos) const;
 	size_t myhash(const HashKey & x) const;
+    size_t mySecondHash(const HashKey & x) const;
 	int findPos(const HashKey & x) const;
 	void rehash();
 };
@@ -74,17 +75,25 @@ template <typename HashKey, typename HashRecord>
 int HashTable<HashKey, HashRecord>::findPos(const HashKey & x) const
 {
 	int offset = 1;
-	int currentPos = myhash(x);
+	size_t currentPos = myhash(x);
 
-	while (hashTable[currentPos].info != EMPTY &&
-		hashTable[currentPos].key != x)
-	{
-		currentPos += offset;  // Compute ith probe
-		offset += 2;                     
-		if (currentPos >= (int)hashTable.size())    // Cheaper than  mod
-			currentPos -= hashTable.size();
-	}
-
+	if (hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
+    {
+        currentPos = mySecondHash(x);
+        if(hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
+        {
+            while(hashTable[currentPos].info != EMPTY && hashTable[currentPos].key != x)
+            {
+                currentPos += offset;  // Compute ith probe
+                offset += 2;
+                if (currentPos >= (int)hashTable.size())    // Cheaper than  mod
+                {
+                     currentPos -= hashTable.size();
+                }
+            }
+        }
+    }
+	
 	return currentPos;
 };
 
@@ -127,13 +136,35 @@ bool HashTable<HashKey, HashRecord>::isActive(int currentPos) const
 	return hashTable[currentPos].info == ACTIVE;
 };
 
-// use built=in hash functions to fine a location.
+// use built=in hash functions to find a location.
 template<typename HashKey, typename HashRecord>
 size_t HashTable<HashKey, HashRecord>::myhash(const HashKey & x) const
 {
-	static hash<HashKey> hf;
-	return hf(x) % hashTable.size();
+//    static hash<HashKey> hf;
+//    return hf(x) % hashTable.size();
+
+    size_t hashVal = 0;
+    for( int i=0; i <  x.length(); i++)
+    {
+        hashVal = (hashVal << 5) ^ x[i] ^ hashVal;
+    }
+    return hashVal % hashTable.size();
 };
+
+/*uses secondary hash to find a location*/
+template<typename HashKey, typename HashRecord>
+size_t HashTable<HashKey, HashRecord>::mySecondHash(const HashKey & x) const
+{
+    size_t hashVal = 0;
+    for( int i=0; i <  x.length(); i++)
+    {
+        hashVal = (hashVal << 5) ^ x[i] ^ hashVal;
+    }
+    return 1 + hashVal % (hashTable.size() - 2);
+}
+
+
+
 
 // Use lazy deletion to remove an element
 // Return boolean to indicate success of operation

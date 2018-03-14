@@ -43,7 +43,6 @@ ifstream inputFile()
 /*Removes punctuation and special characters. Makes everything lowercase*/
 void clean(std::string & nextToken)
 {
-    std::cout << "before clean for loop" << std::endl;
     for (int i = 0; i < nextToken.length();)
     {
         if (nextToken[i] >255 || nextToken[i] < 0 || ispunct(nextToken[i]))
@@ -54,13 +53,12 @@ void clean(std::string & nextToken)
         }
     }
 
-    std::cout << "after clean for loop" << std::endl;
 }
 
-/*Puts the words from inFile into a hash table.*/
+/*Puts the words from inFile into a hash table. Adds the next word into the vector for FirstWordInfo and increments
+ the count*/
 void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem)
 {
-    std::cout << "in to Hash function" << std::endl;
     std::string initializer;
     inFile >> initializer;
     clean(initializer);
@@ -73,12 +71,9 @@ void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem)
     input->updateList(current);
     Poem.insert(initializer, input);
     
-    
-    std::cout << "before While loop" << std::endl;
-    while(!inFile.eof())
+    std::string next;
+    while(inFile >> next)
     {
-        std::string next;
-        inFile >> next;
         clean(next);
         
         FirstWordInfo* hashPos = Poem.find(current);
@@ -96,7 +91,6 @@ void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo> Poem)
         
         current = next;
     }
-    std::cout << "after while loop"<< std::endl;
     
     std::cout << Poem.toString() <<std::endl;
 }
