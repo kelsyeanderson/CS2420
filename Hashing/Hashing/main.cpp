@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
+#include <time.h>
 #include "FollowingWordInfo.hpp"
 #include "FirstWordInfo.hpp"
 #include "HashTable.h"
@@ -12,14 +14,25 @@
 ifstream inputFile();
 void clean(std::string & nextToken);
 void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem);
-void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string> poem, int size, std::string firstWord);
-bool frequency(HashTable<std::string, FirstWordInfo> Stats, FirstWordInfo* firstWord);
+void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord);
+void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
 
 int main()
 {
     HashTable<std::string, FirstWordInfo> Poem;
     vector<std::string> computerWrittenPoem;
+    std::string firstWord = "go";
+    int length = 20;
+    
     toHash(inputFile(), Poem);
+    generatePoem(Poem, computerWrittenPoem, length, firstWord);
+    for(int i = 0; i < computerWrittenPoem.size(); i++)
+    {
+        std::cout << computerWrittenPoem[i] << " ";
+    }
+    std::cout << std::endl;
+    
+    //std::cout << Poem.toString() <<std::endl;
     
     return 0;
 }
@@ -94,29 +107,38 @@ void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem)
         
         current = next;
     }
-    
-    std::cout << Poem.toString() <<std::endl;
 }
 
-
+/*Creates a poem based on the previously made Hash Table. couts words while inputting into poem vector*/
 void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord)
 {
-    poem.push_back(firstWord);
     FirstWordInfo* word = Stats.find(firstWord);
-    
-    for(int i = 0; i < size; i++)
+    if(word == nullptr)
     {
-        int num = word->getCount();
+        std::cout << "Sorry, that word was not found in the poem you requested" << std::endl;
+        exit(-1);
+    }
+    std::cout << firstWord << " ";
+    poem.push_back(firstWord);
+    
+    for(int i = 0; i < size - 1; i++)
+    {
+        int wordCount = word->getCount();
+        srand(time(NULL));
+        int num = (rand() % wordCount) + 1;
         
-        int count = 0;
+        int count = -1;
         while(num > 0)
         {
-            num -= word->secondWordList[count].m_count;
             count++;
+            num -= word->secondWordList[count].m_count;
         }
-        poem.push_back(word->secondWordList[count].m_word);
-        word = Stats.find(word->secondWordList[count].m_word);
+        std::string inputWord = word->secondWordList[count].m_word;
+        poem.push_back(inputWord);
+        word = Stats.find(inputWord);
+        std::cout << inputWord << " ";
     }
+    std::cout << std::endl;
 }
 
 
