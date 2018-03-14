@@ -15,11 +15,11 @@ ifstream inputFile(std::string txtName);
 void clean(std::string & nextToken);
 void toHash(ifstream inFile, HashTable<std::string, FirstWordInfo>& Poem);
 void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::string>& poem, int size, std::string firstWord);
-void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
-void printClown(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
-void printInch(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
-void printPoe(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
-void printSeuss(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem);
+void printGreen(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem);
+void printClown(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem);
+void printInch(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem);
+void printPoe(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem);
+void printSeuss(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem);
 
 
 int main()
@@ -150,7 +150,7 @@ void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::strin
 
 /*---------------------------Print-Functions----------------------------------------*/
 
-void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+void printGreen(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
     std::string txtName = "green.txt";
     std::cout << txtName << std::endl;
@@ -163,7 +163,7 @@ void printGreen(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> 
     generatePoem(Poem, computerWrittenPoem, length, firstWord);
 }
 
-void printClown(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+void printClown(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
     std::string txtName = "clown.txt";
     std::cout << "\n\n------------------------\n" << txtName << std::endl;
@@ -176,7 +176,7 @@ void printClown(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> 
     generatePoem(Poem, computerWrittenPoem, length, firstWord);
 }
 
-void printInch(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+void printInch(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
     std::string txtName = "inch.txt";
     std::cout << "\n\n------------------------\n" << txtName << std::endl;
@@ -188,7 +188,7 @@ void printInch(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> c
     generatePoem(Poem, computerWrittenPoem, length, firstWord);
 }
 
-void printPoe(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+void printPoe(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
     std::string txtName = "poe.txt";
     std::cout << "\n\n------------------------\n" << txtName << std::endl;
@@ -200,7 +200,7 @@ void printPoe(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> co
     generatePoem(Poem, computerWrittenPoem, length, firstWord);
 }
 
-void printSeuss(HashTable<std::string, FirstWordInfo> Poem, vector<std::string> computerWrittenPoem)
+void printSeuss(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
     std::string txtName = "seuss.txt";
     std::cout << "\n\n------------------------\n" << txtName << std::endl;
