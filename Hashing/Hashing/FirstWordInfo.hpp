@@ -61,6 +61,7 @@ void FirstWordInfo::updateList(std::string w)
     }
 }
 
+/*Appends the string information from each of the Following Words to the end of the string in First Word*/
 std::string FirstWordInfo::toString()
 {
     std::string output =  m_word + ": ";

@@ -70,7 +70,7 @@ std::string HashTable<HashKey, HashRecord>::toString(int howMany)
 }
 
 // return the subscript where x is located in the hash table.    
-// Quadratic probing is used.  Can you figure out why this implements quadratic probing?
+// Uses double hashing
 template <typename HashKey, typename HashRecord>
 int HashTable<HashKey, HashRecord>::findPos(const HashKey & x) const
 {

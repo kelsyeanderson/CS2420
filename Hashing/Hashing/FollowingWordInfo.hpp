@@ -26,6 +26,7 @@ public:
     void increment() {m_count++;}
 };
 
+/*Appends the count to the end of the word string*/
 std::string FollowingWordInfo::toString()
 {
     return m_word + "(" + std::to_string(m_count) + ")";

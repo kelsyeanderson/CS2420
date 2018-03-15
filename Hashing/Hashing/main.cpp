@@ -149,6 +149,7 @@ void generatePoem(HashTable<std::string, FirstWordInfo> Stats, vector<std::strin
 
 
 /*---------------------------Print-Functions----------------------------------------*/
+/*the following functions have the name of the text file they were created for, the word they want to start their computer generated poem, and the number of words they want that poem to be. It then calls the function that creates a hash table based on the specified file name, and then calls the function to create the poem. A hash table and vector are passed in by reference, so if necessary they can be used in the main function.*/
 
 void printGreen(HashTable<std::string, FirstWordInfo>& Poem, vector<std::string>& computerWrittenPoem)
 {
