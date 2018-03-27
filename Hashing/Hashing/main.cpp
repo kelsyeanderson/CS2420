@@ -27,25 +27,25 @@ int main()
     HashTable<std::string, FirstWordInfo> GreenPoem;
     vector<std::string> computerGreenPoem;
     printGreen(GreenPoem, computerGreenPoem);
-    
+
     HashTable<std::string, FirstWordInfo> ClownPoem;
     vector<std::string> computerClownPoem;
     printClown(ClownPoem, computerClownPoem);
-    
+
     HashTable<std::string, FirstWordInfo> InchPoem;
     vector<std::string> computerInchPoem;
     printInch(InchPoem, computerInchPoem);
-    
-    
+
+
     HashTable<std::string, FirstWordInfo> PoePoem;
     vector<std::string> computerPoePoem;
     printPoe(PoePoem, computerPoePoem);
-    
+
     HashTable<std::string, FirstWordInfo> SeussPoem;
     vector<std::string> computerSeussPoem;
     printSeuss(SeussPoem, computerSeussPoem);
-    
 
+   
     return 0;
 }
 

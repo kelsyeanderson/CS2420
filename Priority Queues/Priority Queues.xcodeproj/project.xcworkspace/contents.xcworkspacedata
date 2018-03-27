@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/ItemType.h">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Files I don&apos;t want hanging around the top">
+   </Group>
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/Node.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQ.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQHeap.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQHeap.h">
+   </FileRef>
+   <FileRef
+      location = "group:../Priority Queues/Prog5In.txt">
+   </FileRef>
+   <FileRef
+      location = "group:../Priority Queues/TestPQ.cpp">
+   </FileRef>
+   <FileRef
+      location = "self:Priority Queues.xcodeproj">
+   </FileRef>
+</Workspace>

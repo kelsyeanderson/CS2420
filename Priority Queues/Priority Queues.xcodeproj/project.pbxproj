@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7AB13DDC2066E15500149DEF /* TestPQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AB13DDB2066E15500149DEF /* TestPQ.cpp */; };
+		7AB13DDE2066E15900149DEF /* PQHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7AB13DDD2066E15900149DEF /* PQHeap.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7AB13DCF2066E0D800149DEF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7A24F1F7206ADB5B00CD81DB /* LeftistHeap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LeftistHeap.hpp; sourceTree = "<group>"; };
+		7AB13DD12066E0D800149DEF /* Priority Queues */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Priority Queues"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AB13DDB2066E15500149DEF /* TestPQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestPQ.cpp; sourceTree = "<group>"; };
+		7AB13DDD2066E15900149DEF /* PQHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PQHeap.cpp; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQHeap.cpp"; sourceTree = "<absolute>"; };
+		7AB13DDF2066E15D00149DEF /* ItemType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ItemType.h; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/ItemType.h"; sourceTree = "<absolute>"; };
+		7AB13DE02066E15F00149DEF /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Node.h; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/Node.h"; sourceTree = "<absolute>"; };
+		7AB13DE12066E16100149DEF /* PQHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PQHeap.h; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQHeap.h"; sourceTree = "<absolute>"; };
+		7AB13DE22066E17D00149DEF /* PQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PQ.h; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQ.h"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7AB13DCE2066E0D800149DEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7AB13DC82066E0D800149DEF = {
+			isa = PBXGroup;
+			children = (
+				7AB13DD32066E0D800149DEF /* Priority Queues */,
+				7AB13DD22066E0D800149DEF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7AB13DD22066E0D800149DEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7AB13DD12066E0D800149DEF /* Priority Queues */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7AB13DD32066E0D800149DEF /* Priority Queues */ = {
+			isa = PBXGroup;
+			children = (
+				7AB13DE22066E17D00149DEF /* PQ.h */,
+				7AB13DE02066E15F00149DEF /* Node.h */,
+				7AB13DDF2066E15D00149DEF /* ItemType.h */,
+				7AB13DE12066E16100149DEF /* PQHeap.h */,
+				7AB13DDD2066E15900149DEF /* PQHeap.cpp */,
+				7A24F1F7206ADB5B00CD81DB /* LeftistHeap.hpp */,
+				7AB13DDB2066E15500149DEF /* TestPQ.cpp */,
+			);
+			path = "Priority Queues";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7AB13DD02066E0D800149DEF /* Priority Queues */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AB13DD82066E0D800149DEF /* Build configuration list for PBXNativeTarget "Priority Queues" */;
+			buildPhases = (
+				7AB13DCD2066E0D800149DEF /* Sources */,
+				7AB13DCE2066E0D800149DEF /* Frameworks */,
+				7AB13DCF2066E0D800149DEF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Priority Queues";
+			productName = "Priority Queues";
+			productReference = 7AB13DD12066E0D800149DEF /* Priority Queues */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7AB13DC92066E0D800149DEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Kelsye Anderson";
+				TargetAttributes = {
+					7AB13DD02066E0D800149DEF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7AB13DCC2066E0D800149DEF /* Build configuration list for PBXProject "Priority Queues" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7AB13DC82066E0D800149DEF;
+			productRefGroup = 7AB13DD22066E0D800149DEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7AB13DD02066E0D800149DEF /* Priority Queues */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AB13DCD2066E0D800149DEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AB13DDE2066E15900149DEF /* PQHeap.cpp in Sources */,
+				7AB13DDC2066E15500149DEF /* TestPQ.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7AB13DD62066E0D800149DEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7AB13DD72066E0D800149DEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7AB13DD92066E0D800149DEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7AB13DDA2066E0D800149DEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7AB13DCC2066E0D800149DEF /* Build configuration list for PBXProject "Priority Queues" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AB13DD62066E0D800149DEF /* Debug */,
+				7AB13DD72066E0D800149DEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AB13DD82066E0D800149DEF /* Build configuration list for PBXNativeTarget "Priority Queues" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AB13DD92066E0D800149DEF /* Debug */,
+				7AB13DDA2066E0D800149DEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7AB13DC92066E0D800149DEF /* Project object */;
+}
