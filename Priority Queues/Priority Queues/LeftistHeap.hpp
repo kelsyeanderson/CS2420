@@ -20,6 +20,7 @@ public:
     void insert(ItemType input); //inserts an item into the tree
     Node* merge(Node* heap1, Node* heap2 = nullptr); // merges two heaps together
     void removeMin(); //removes the root from the tree
+    LeftistHeap(); 
     
 private:
     struct Node
@@ -45,6 +46,7 @@ private:
     void setAllNullHeight(Node* & ptr); //recursive function to set all null heights
     void setNullHeight(Node* & ptr); //sets individual null heights
     void swapKids(Node* & ptr); //switches the left and right children
+    bool notLeftist(Node* ptr);
 };
 
 
@@ -101,7 +103,7 @@ Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
     {
         swapkids(small);
     }
-    setNullHeight(small);
+    setAllNullHeight();
     return small;
 
 }
@@ -109,16 +111,36 @@ Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
 /*swaps the left and right children of inputted pointer with each other*/
 void LeftistHeap::swapkids(Node* & ptr)
 {
-    Node* temp = ptr->right;
-    ptr->right = ptr->left;
-    ptr->left = temp;
+    if(ptr != nullptr)
+    {
+        if(ptr->left->nullHeight < ptr->right->nullHeight)
+        {
+            Node* temp = ptr->right;
+            ptr->right = ptr->left;
+            ptr->left = temp;
+        }
+    }
+    swapkids(ptr->left);
+    swapkids(ptr->right);
 }
 
+bool LeftistHeap::notLeftist(Node* ptr)
+{
+    if(ptr == nullptr)
+    {
+        return FALSE;
+    }
+    if(ptr->left->nullHeight < ptr->right->nullHeight)
+    {
+        return true;
+    }
+    return notLeftist(ptr->right) && notLeftist(ptr->left);
+}
 
 /*merges the left and right child of the root to remove the min*/
 void LeftistHeap::removeMin()
 {
-    merge(m_root->right, m_root->left);
+    m_root = merge(m_root->right, m_root->left);
 }
 
 

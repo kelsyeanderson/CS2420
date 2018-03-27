@@ -1,7 +1,7 @@
 #include "PQHeap.h"
 #include <time.h>
 //#include "SkewHeap.h"
-//#include "Leftist.h"
+#include "LeftistHeap.hpp"
 
 //Insert limit elements of the file fin into heap.
 void insertNext(PQ & pq,std::ifstream & fin,int limit=0) 
@@ -20,7 +20,7 @@ void insertNext(PQ & pq,std::ifstream & fin,int limit=0)
 
 int main()
 {
-    
+    LeftistHeap test;
 //    clock_t start = clock();
 //    int const DELETE_CT=20;
 //    int const PRINTSIZE=30;
