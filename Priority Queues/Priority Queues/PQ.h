@@ -15,8 +15,8 @@ class PQ
     virtual std::string toString(int size) const = 0;
 	int getSize(){return size;}
 	bool isEmpty() {return size==0;}
-    virtual void insert(ItemType & x )= 0 ;
-	virtual void merge(PQ * second)=0;
+    virtual void insert(ItemType & x ) = 0 ;
+	virtual void merge(PQ * second) = 0;
 	virtual void makeEmpty() {size=0;}
 };
 #endif
