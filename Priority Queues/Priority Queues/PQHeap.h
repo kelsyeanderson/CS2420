@@ -7,11 +7,12 @@
 class PQHeap: public PQ 
 {
 public:
-    static const int KIDS = 4;//2;
+    static const int KIDS = 4; //changed the number of kids to be for a d=4 d-ary heap
+    static const int OLDKIDS = 2;
 	PQHeap(std::string name, int size);
 	void insert(ItemType &);  //    virtual void insert(ItemType & x )=0 ;
-	ItemType deleteMax();
-    ItemType newDeleteMax();
+	ItemType oldDeleteMax();
+    ItemType deleteMax();
 	int getCount() const;
 	void merge(PQ *h);  // merges h into current heap  
 	std::string toString(int size) const;

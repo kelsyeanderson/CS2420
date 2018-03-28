@@ -27,7 +27,7 @@ void PQHeap::insert(ItemType &newVal)
 }
 
 /*delete max for 4 kids instead of 2*/
-ItemType PQHeap::newDeleteMax( )
+ItemType PQHeap::deleteMax( )
 {
     if (size==0)
     {
@@ -47,18 +47,24 @@ ItemType PQHeap::newDeleteMax( )
           (fourthChild < size && currVal.priority < heap[fourthChild].priority))
     {
         int bestChild = firstChild;
-        if( secondChild < size && heap[secondChild].priority > heap[firstChild].priority )
+        int priority1 = heap[firstChild].priority;
+        int priority2 = heap[secondChild].priority;
+        int priority3 = heap[thirdChild].priority;
+        int priority4 = heap[fourthChild].priority;
+        
+        if( secondChild < size && priority2 > std::max(priority1, std::max(priority3, priority4)))
         {
             bestChild = secondChild;
         }
-        else if (thirdChild < size && heap[thirdChild].priority > heap[secondChild].priority)
+        else if (thirdChild < size && priority3 > std::max(priority1, std::max(priority2, priority4)))
         {
             bestChild = thirdChild;
         }
-        else if (fourthChild < size && heap[fourthChild].priority > heap[thirdChild].priority)
+        else if (fourthChild < size && priority4 > std::max(priority1, std::max(priority2, priority3)))
         {
             bestChild = fourthChild;
         }
+        
         heap[curr] = heap[bestChild];
         curr = bestChild;
         firstChild = KIDS * bestChild + 1;
@@ -74,7 +80,7 @@ ItemType PQHeap::newDeleteMax( )
 
 
 // Delete maximum value, re-heapify, and return max element
-ItemType PQHeap::deleteMax( )
+ItemType PQHeap::oldDeleteMax( )
 {  	
 	if (size==0)
     {
@@ -94,7 +100,7 @@ ItemType PQHeap::deleteMax( )
 				bestChild = right;
 			heap[curr] = heap[bestChild];
 			curr = bestChild;
-			left = KIDS*bestChild+1;
+			left = OLDKIDS*bestChild+1;
 			right = left+1;
 	} // endwhile
 
