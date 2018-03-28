@@ -10,75 +10,75 @@
 #define LeftistHeap_hpp
 
 #include <string>
+#include <algorithm>
 #include "ItemType.h"
-
+#include "Node.h"
 
 class LeftistHeap
 {
 public:
-    ItemType getMin() {return m_root;}; //returns the pointer to the min ItemType in heap
+    Node* getMin() {return m_root;}; //returns the pointer to the min ItemType in heap
     void insert(ItemType input); //inserts an item into the tree
-    Node* merge(Node* heap1, Node* heap2 = nullptr); // merges two heaps together
     void removeMin(); //removes the root from the tree
-    LeftistHeap(); 
+    void merge(Node* heap2); //helper function for merging 2 Leftist heaps
+    void toString()  {toString(m_root," ",0);}; //helper function for to String. Use at your own risk
+    void toString(Node* ptr, std::string indent, int currdepth, int depth = std::numeric_limits<int>::max()); //outputs Leftist Heap
     
 private:
-    struct Node
-    {
-        ItemType element;
-        Node* left;
-        Node* right;
-        int nullHeight;
-        
-        Node( ItemType e, Node *l = NULL, Node *r = NULL, int h = -1 ) :
-        element( e ), left( l ), right( r ), nullHeight( h ) {}
-        virtual std::string toString() {
-            std::stringstream out;
-            out << element.toString();
-            if (left!=NULL) out << "[l:" << left->element.priority<< "]";
-            if (right!=NULL) out << "[r:" << right->element.priority<< "]";
-            return out.str();
-        }
-        virtual std::string toStringShort() { return element.word;}
-    };
-    Node* m_root;
-    void setAllNullHeight() {setNullHeight(m_root);}; //calls the overided setAllNullHeight with the root
+    Node* m_root = nullptr;
+    
+    void setAllNullHeight(); //calls the overided setAllNullHeight with the root
     void setAllNullHeight(Node* & ptr); //recursive function to set all null heights
-    void setNullHeight(Node* & ptr); //sets individual null heights
-    void swapKids(Node* & ptr); //switches the left and right children
-    bool notLeftist(Node* ptr);
+    void swapkids(Node* & ptr); //switches the left and right children
+    Node* merge(Node* &heap1, Node* &heap2); // merges two heaps together
+    bool notLeftist(Node* ptr); //returns true if not a leftist heap
 };
 
+/*helper function for other setAllNullHeight function. Checks if root is null*/
+void LeftistHeap::setAllNullHeight()
+{
+    if(m_root != nullptr)
+    {
+        setAllNullHeight(m_root);
+    }
+};
 
 /*recursively goes through the leftist heap and sets the nullHeight for every node*/
 void LeftistHeap::setAllNullHeight(Node* & ptr)
 {
-    if (ptr == nullptr)
+    if(ptr == nullptr)
     {
-        ptr->nullHeight = -1;
+        return;
     }
-    setNullHeight(ptr->left);
-    setNullHeight(ptr->right);
-    
-    setNullHeight(ptr);
-}
-
-/*sets the nullHeight for a specific Node*/
-void LeftistHeap::setNullHeight(Node* & ptr)
-{
-    ptr->nullHeight = std::min(ptr->left->nullHeight, ptr->right->nullHeight) + 1;
+    if (ptr->left == nullptr || ptr->right == nullptr)
+    {
+        ptr->nullHeight = 0;
+    }
+    setAllNullHeight(ptr->left);
+    setAllNullHeight(ptr->right);
+    if (ptr->left != nullptr && ptr->right != nullptr)
+    {
+        ptr->nullHeight = std::min(ptr->left->nullHeight, ptr->right->nullHeight) + 1;
+    }
 }
 
 /*inserts the ItemType into the Leftist Heap*/
 void LeftistHeap::insert(ItemType input)
 {
-    Node* temp;
-    temp->element = input;
-    merge(m_root, temp);
+    Node* temp = new Node(input);
+    m_root = merge(temp, m_root);
+    setAllNullHeight();
+}
+
+/*helper function for merge. Merges current leftist heap with inputed leftist heap*/
+void LeftistHeap::merge(Node* heap2)
+{
+    this->m_root = merge(this->m_root, heap2);
+    setAllNullHeight();
 }
 
 /*Combines two heaps based on which root is smaller*/
-Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
+Node* LeftistHeap::merge(Node* &heap1, Node* &heap2)
 {
     Node* small;
     if (heap1 == nullptr)
@@ -87,7 +87,7 @@ Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
     }
     if (heap2 == nullptr)
     {
-        return heap2;
+        return heap1;
     }
     if (heap1->element.priority < heap2->element.priority)
     {
@@ -101,9 +101,8 @@ Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
     }
     if (notLeftist(small))
     {
-        swapkids(small);
+        std::swap(small->left,small->right);
     }
-    setAllNullHeight();
     return small;
 
 }
@@ -111,7 +110,8 @@ Node* LeftistHeap::merge(Node* heap1, Node* heap2 = nullptr)
 /*swaps the left and right children of inputted pointer with each other*/
 void LeftistHeap::swapkids(Node* & ptr)
 {
-    if(ptr != nullptr)
+    if((ptr != nullptr) && (ptr->left == nullptr && ptr->right == nullptr) &&
+       (ptr->left != nullptr && ptr->right == nullptr))
     {
         if(ptr->left->nullHeight < ptr->right->nullHeight)
         {
@@ -124,16 +124,30 @@ void LeftistHeap::swapkids(Node* & ptr)
     swapkids(ptr->right);
 }
 
+/*returns false if a leftist heap and true if not*/
 bool LeftistHeap::notLeftist(Node* ptr)
 {
-    if(ptr == nullptr)
+    if (ptr == nullptr)
     {
-        return FALSE;
+        return false;
     }
-    if(ptr->left->nullHeight < ptr->right->nullHeight)
+    else if(ptr->left == nullptr && ptr->right == nullptr)
+    {
+        return false;
+    }
+    else if (ptr->left != nullptr && ptr->right == nullptr)
+    {
+        return false;
+    }
+    else if (ptr->left == nullptr && ptr->right != nullptr)
     {
         return true;
     }
+    else if(ptr->left->nullHeight < ptr->right->nullHeight)
+    {
+        return true;
+    }
+    
     return notLeftist(ptr->right) && notLeftist(ptr->left);
 }
 
@@ -143,7 +157,16 @@ void LeftistHeap::removeMin()
     m_root = merge(m_root->right, m_root->left);
 }
 
-
+/*outputs the heap into a string*/
+void LeftistHeap::toString(Node* ptr, std::string indent, int currdepth, int depth)
+{
+    if (ptr != nullptr)// || currdepth > depth
+    {
+        toString(ptr->right, indent + "  ", currdepth + 1, depth);
+        std::cout << indent << ptr->toString() << std::endl;;
+        toString(ptr->left, indent + "  ", currdepth + 1, depth);
+    }
+}
 
 
 

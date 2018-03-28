@@ -2,25 +2,26 @@
 #include <time.h>
 //#include "SkewHeap.h"
 #include "LeftistHeap.hpp"
+#include <fstream>
+#include <iostream>
+#include "Node.h"
 
 //Insert limit elements of the file fin into heap.
-void insertNext(PQ & pq,std::ifstream & fin,int limit=0) 
-{	if (limit ==0) 
-		limit = std::numeric_limits<int>::max();
-	std::string word;
-	int ct;
-	for (int i =0; i <= limit && !fin.eof(); i++)
-	{
-		fin >> word >> ct;
-		//std::cout << "inserting " << word << ct << std::endl;
-		ItemType item(word, ct);
-		pq.insert(item);
-	}
-}
+void insertLeft(LeftistHeap & leftist,std::ifstream & fin,int limit=0);
+void insertNext(PQ & pq,std::ifstream & fin,int limit=0);
 
 int main()
 {
-    LeftistHeap test;
+    LeftistHeap leftHeap;
+    std::ifstream inFile("Prog5In.txt");
+    if (!inFile)
+    {
+        std::cout << "File not found :(" << std::endl;
+        exit(-1);
+    }
+    insertLeft(leftHeap, inFile);
+
+    leftHeap.toString();
 //    clock_t start = clock();
 //    int const DELETE_CT=20;
 //    int const PRINTSIZE=30;
@@ -42,6 +43,37 @@ int main()
 //    clock_t time = clock()-start;
 //    std::cout << "Elapsed time = " << ((float) time)/CLOCKS_PER_SEC << std::endl;
 //    std::cin.ignore();
+    return 0;
 }
+
+void insertLeft(LeftistHeap & leftist,std::ifstream & fin,int limit)
+{
+    if (limit ==0)
+        limit = std::numeric_limits<int>::max();
+    std::string word;
+    int ct;
+    for (int i =0; i <= limit && !fin.eof(); i++)
+    {
+        fin >> word >> ct;
+        std::cout << "inserting " << word << ct << std::endl;
+        ItemType item(word, ct);
+        leftist.insert(item);
+    }
+}
+
+void insertNext(PQ & pq,std::ifstream & fin,int limit)
+{    if (limit ==0)
+    limit = std::numeric_limits<int>::max();
+    std::string word;
+    int ct;
+    for (int i =0; i <= limit && !fin.eof(); i++)
+    {
+        fin >> word >> ct;
+        //std::cout << "inserting " << word << ct << std::endl;
+        ItemType item(word, ct);
+        pq.insert(item);
+    }
+}
+
 
 
