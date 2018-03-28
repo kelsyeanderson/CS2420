@@ -42,21 +42,34 @@ ItemType PQHeap::newDeleteMax( )
     int thirdChild = secondChild + 1;
     int fourthChild = thirdChild + 1;
     while( (firstChild < size && currVal.priority < heap[firstChild].priority) ||
-          (secondChild < size && currVal.priority < heap[secondChild].priority) )
+          (secondChild < size && currVal.priority < heap[secondChild].priority) ||
+          (thirdChild < size && currVal.priority < heap[thirdChild].priority) ||
+          (fourthChild < size && currVal.priority < heap[fourthChild].priority))
     {
         int bestChild = firstChild;
         if( secondChild < size && heap[secondChild].priority > heap[firstChild].priority )
+        {
             bestChild = secondChild;
+        }
+        else if (thirdChild < size && heap[thirdChild].priority > heap[secondChild].priority)
+        {
+            bestChild = thirdChild;
+        }
+        else if (fourthChild < size && heap[fourthChild].priority > heap[thirdChild].priority)
+        {
+            bestChild = fourthChild;
+        }
         heap[curr] = heap[bestChild];
         curr = bestChild;
-        firstChild = KIDS*bestChild+1;
-        secondChild = firstChild+1;
+        firstChild = KIDS * bestChild + 1;
+        secondChild = firstChild + 1;
+        thirdChild = secondChild + 1;
+        fourthChild = thirdChild + 1;
     } // endwhile
     
     
     heap[curr] = currVal;
     return toReturn;
-    
 }
 
 

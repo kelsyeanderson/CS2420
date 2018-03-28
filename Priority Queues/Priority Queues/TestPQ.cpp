@@ -12,28 +12,28 @@ void insertNext(PQ & pq,std::ifstream & fin,int limit=0);
 
 int main()
 {
-    insertLeft(false);
-//    clock_t start = clock();
-//    int const DELETE_CT=20;
-//    int const PRINTSIZE=30;
-//    int const HOWMANY = 100;
-//
-//    PQHeap pqMax("MaxHeap",6000);
-//
-//    std::ifstream fin;
-//    fin.open("Prog5In.txt");
-//    assert(fin);
-//
-//    for (int i = 0; i < 60; i++)
-//    {
-//        insertNext(pqMax, fin, HOWMANY);
-//        std::cout << pqMax.deleteMax().toString() << std::endl;
-//    }
-//
-//
-//    clock_t time = clock()-start;
-//    std::cout << "Elapsed time = " << ((float) time)/CLOCKS_PER_SEC << std::endl;
-//    std::cin.ignore();
+    //insertLeft(false);
+    clock_t start = clock();
+    int const DELETE_CT=20;
+    int const PRINTSIZE=30;
+    int const HOWMANY = 100;
+
+    PQHeap pqMax("MaxHeap",6000);
+
+    std::ifstream fin;
+    fin.open("Prog5In.txt");
+    assert(fin);
+
+    for (int i = 0; i < 60; i++)
+    {
+        insertNext(pqMax, fin, HOWMANY);
+        std::cout << pqMax.deleteMax().toString() << std::endl;
+    }
+
+
+    clock_t time = clock()-start;
+    std::cout << "Elapsed time = " << ((float) time)/CLOCKS_PER_SEC << std::endl;
+    std::cin.ignore();
     return 0;
 }
 

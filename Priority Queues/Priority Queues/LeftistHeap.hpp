@@ -29,7 +29,6 @@ private:
     
     void setAllNullHeight(); //calls the overided setAllNullHeight with the root
     void setAllNullHeight(Node* & ptr); //recursive function to set all null heights
-    void swapkids(Node* & ptr); //switches the left and right children
     Node* merge(Node* &heap1, Node* &heap2); // merges two heaps together
     bool notLeftist(Node* ptr); //returns true if not a leftist heap
 };
@@ -78,7 +77,7 @@ void LeftistHeap::merge(Node* heap2)
 }
 
 /*Combines two heaps based on which root is smaller*/
-Node* LeftistHeap::merge(Node* &heap1, Node* &heap2)
+Node* LeftistHeap::merge(Node* & heap1, Node* & heap2)
 {
     Node* small;
     if (heap1 == nullptr)
@@ -107,22 +106,6 @@ Node* LeftistHeap::merge(Node* &heap1, Node* &heap2)
 
 }
 
-/*swaps the left and right children of inputted pointer with each other*/
-void LeftistHeap::swapkids(Node* & ptr)
-{
-    if((ptr != nullptr) && (ptr->left == nullptr && ptr->right == nullptr) &&
-       (ptr->left != nullptr && ptr->right == nullptr))
-    {
-        if(ptr->left->nullHeight < ptr->right->nullHeight)
-        {
-            Node* temp = ptr->right;
-            ptr->right = ptr->left;
-            ptr->left = temp;
-        }
-    }
-    swapkids(ptr->left);
-    swapkids(ptr->right);
-}
 
 /*returns false if a leftist heap and true if not*/
 bool LeftistHeap::notLeftist(Node* ptr)
