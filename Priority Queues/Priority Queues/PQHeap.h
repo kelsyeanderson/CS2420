@@ -17,7 +17,7 @@ public:
 	void merge(PQ *h);  // merges h into current heap  
 	std::string toString(int size) const;
 private:
-	int getBestKid(int bestVal,int curr, int size );
+	int getBestKid(int hole, int size);
 	ItemType * heap;   // Heap Array
 	int physicalSize;  // Physical size of heap
 };

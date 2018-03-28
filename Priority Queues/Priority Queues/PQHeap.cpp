@@ -35,46 +35,28 @@ ItemType PQHeap::deleteMax( )
     }
     ItemType toReturn = heap[0];
     size--;
-    ItemType currVal = heap[size];
-    int curr = 0;
-    int firstChild = 1;
-    int secondChild = firstChild + 1;
-    int thirdChild = secondChild + 1;
-    int fourthChild = thirdChild + 1;
-    while( (firstChild < size && currVal.priority < heap[firstChild].priority) ||
-          (secondChild < size && currVal.priority < heap[secondChild].priority) ||
-          (thirdChild < size && currVal.priority < heap[thirdChild].priority) ||
-          (fourthChild < size && currVal.priority < heap[fourthChild].priority))
+    ItemType orphan = heap[size];
+    int hole = 0;
+    
+    bool done = false;
+    while(!done)
     {
-        int bestChild = firstChild;
-        int priority1 = heap[firstChild].priority;
-        int priority2 = heap[secondChild].priority;
-        int priority3 = heap[thirdChild].priority;
-        int priority4 = heap[fourthChild].priority;
+        int bestChild = getBestKid(hole, size);
         
-        if( secondChild < size && priority2 > std::max(priority1, std::max(priority3, priority4)))
+        if(orphan.priority > heap[bestChild].priority )
         {
-            bestChild = secondChild;
-        }
-        else if (thirdChild < size && priority3 > std::max(priority1, std::max(priority2, priority4)))
-        {
-            bestChild = thirdChild;
-        }
-        else if (fourthChild < size && priority4 > std::max(priority1, std::max(priority2, priority3)))
-        {
-            bestChild = fourthChild;
+            heap[bestChild] = orphan;
+            done = true;
         }
         
-        heap[curr] = heap[bestChild];
-        curr = bestChild;
-        firstChild = KIDS * bestChild + 1;
-        secondChild = firstChild + 1;
-        thirdChild = secondChild + 1;
-        fourthChild = thirdChild + 1;
+        
+        heap[hole] = heap[bestChild];
+        hole = bestChild;
+        //start = KIDS * bestChild + 1;
     } // endwhile
     
     
-    heap[curr] = currVal;
+    heap[hole] = orphan;
     return toReturn;
 }
 
@@ -140,3 +122,23 @@ std::string PQHeap::toString(int maxSize) const
 	out << std::endl;
 	return out.str();
 }
+
+
+int PQHeap::getBestKid(int hole, int size)
+{
+    int bestVal = (KIDS * hole) + 1;
+    for (int i = bestVal + 1; i < size && i < bestVal + (KIDS - 1); i++)
+    {
+        if(heap[i].priority < heap[bestVal].priority)
+        {
+            bestVal = i;
+        }
+    }
+    
+    return bestVal;
+}
+
+
+
+
+

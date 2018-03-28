@@ -86,14 +86,14 @@ void insertNext(PQ & pq,std::ifstream & fin,int limit)
     }
     std::string word;
     int ct;
+    fin >> word >> ct;
     for (int i =0; i <= limit && !fin.eof(); i++)
     {
-        fin >> word >> ct;
         //std::cout << "inserting " << word << ct << std::endl;
         ItemType item(word, ct);
         pq.insert(item);
+        fin >> word >> ct;
     }
+
 }
-
-
 
