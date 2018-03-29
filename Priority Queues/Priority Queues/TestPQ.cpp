@@ -25,11 +25,11 @@ int main()
     PQHeap oldMax("OldMaxHeap",6000);
 
     std::ifstream fin;
-    fin.open("Prog5In.txt");
+    fin.open("sixty1.txt");
     assert(fin);
     
     std::ifstream fin2;
-    fin2.open("new.txt");
+    fin2.open("sixty2.txt");
     assert(fin2);
 
     for (int i = 0; i < 60; i++)
@@ -37,9 +37,10 @@ int main()
         insertNext(pqMax, fin, HOWMANY);
         std::cout << i << " New delete\n--------------------" << std::endl;
         std::cout << pqMax.deleteMax().toString() << std::endl << std::endl;
+        /*
         insertNext(oldMax, fin2, HOWMANY);
         std::cout << i << " Old delete\n--------------------" << std::endl;
-        std::cout << oldMax.oldDeleteMax().toString() << std::endl << std::endl;
+        std::cout << oldMax.oldDeleteMax().toString() << std::endl << std::endl;*/
     }
 
 
@@ -86,13 +87,12 @@ void insertNext(PQ & pq,std::ifstream & fin,int limit)
     }
     std::string word;
     int ct;
-    fin >> word >> ct;
     for (int i =0; i <= limit && !fin.eof(); i++)
     {
+        fin >> word >> ct;
         //std::cout << "inserting " << word << ct << std::endl;
         ItemType item(word, ct);
         pq.insert(item);
-        fin >> word >> ct;
     }
 
 }

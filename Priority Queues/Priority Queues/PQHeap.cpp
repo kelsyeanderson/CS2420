@@ -43,18 +43,20 @@ ItemType PQHeap::deleteMax( )
     {
         int bestChild = getBestKid(hole, size);
         
-        if(orphan.priority > heap[bestChild].priority )
+        if(bestChild < 0)
         {
-            heap[bestChild] = orphan;
             done = true;
         }
-        
-        
-        heap[hole] = heap[bestChild];
-        hole = bestChild;
-        //start = KIDS * bestChild + 1;
+        else if(orphan.priority < heap[bestChild].priority)
+        {
+            heap[hole] = heap[bestChild];
+            hole = bestChild;
+        }
+        else
+        {
+            done = true;
+        }
     } // endwhile
-    
     
     heap[hole] = orphan;
     return toReturn;
@@ -127,9 +129,14 @@ std::string PQHeap::toString(int maxSize) const
 int PQHeap::getBestKid(int hole, int size)
 {
     int bestVal = (KIDS * hole) + 1;
-    for (int i = bestVal + 1; i < size && i < bestVal + (KIDS - 1); i++)
+    if(bestVal >= size)
     {
-        if(heap[i].priority < heap[bestVal].priority)
+        return -1;
+    }
+    
+    for (int i = bestVal + 1; i < size && i < bestVal + KIDS; i++)
+    {
+        if(heap[i].priority > heap[bestVal].priority)
         {
             bestVal = i;
         }
