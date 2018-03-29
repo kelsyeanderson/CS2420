@@ -18,22 +18,31 @@ public:
     ItemType m_med;
     LeftistHeap minHeap;
     PQHeap maxHeap;
+    Median();
     void insert(ItemType input); //inserts ItemTypes into the Median class
     void toString(); //outputs the med [word and frequency]
+    ItemType removeMed(); //removes the median from whichever has a greater size
 private:
     void balance(); //makes sure the heaps are balanced
 
 };
 
-void Median::insert(ItemType input)
+Median::Median():
+    m_med("", -1), minHeap(), maxHeap("MaxHeap",6000) {}
+
+void Median::insert(ItemType newValue)
 {
-    if(input.priority > m_med.priority)
+    if (m_med.priority == -1)
     {
-        minHeap.insert(input);
+        m_med = newValue;
     }
-    else
+    else if(newValue.priority > m_med.priority)
     {
-        maxHeap.insert(input);
+        minHeap.insert(newValue);
+    }
+    else if(newValue.priority <= m_med.priority)
+    {
+        maxHeap.insert(newValue);
     }
     balance();
 }
@@ -58,9 +67,27 @@ void Median::balance()
     }
 }
 
+ItemType Median::removeMed()
+{
+    ItemType toReturn = m_med;
+    if(maxHeap.size > minHeap.size)
+    {
+        m_med = maxHeap.deleteMax();
+    }
+    else if(minHeap.size > maxHeap.size)
+    {
+        m_med = minHeap.removeMin();
+    }
+    else
+    {
+        m_med = minHeap.removeMin();
+    }
+    return toReturn;
+}
+
 void Median::toString()
 {
-    std::cout << "Median: [" << m_med.word << ", " << m_med.priority << "]" << std::endl;
+    std::cout << "[" << m_med.word << ", " << m_med.priority << "]" << std::endl;
 }
 
 

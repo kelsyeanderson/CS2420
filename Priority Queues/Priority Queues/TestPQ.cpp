@@ -9,45 +9,45 @@
 
 //Insert limit elements of the file fin into heap.
 void insertLeft(bool readLeft);
-void insertMed(PQ & pq,std::ifstream & fin,int limit);
+void insertMed(bool readMed);
 void insertNext(PQ & pq,std::ifstream & fin,int limit=0);
 
 int main()
 {
 
 //    insertLeft(false);  // uncomment line to check leftist heap. Change input to true to have it print tree
+    insertMed(true);
     
-    
-    clock_t start = clock();
-    int const DELETE_CT=20;
-    int const PRINTSIZE=30;
-    int const HOWMANY = 100;
-
-    PQHeap pqMax("MaxHeap",6000);
-    PQHeap oldMax("OldMaxHeap",6000);
-
-    std::ifstream fin;
-    fin.open("sixty1.txt");
-    assert(fin);
-    
-    std::ifstream fin2;
-    fin2.open("sixty2.txt");
-    assert(fin2);
-
-    for (int i = 0; i < 60; i++)
-    {
-        insertNext(pqMax, fin, HOWMANY);
-        std::cout << i << " New delete\n--------------------" << std::endl;
-        std::cout << pqMax.deleteMax().toString() << std::endl << std::endl;
-        /*
-        insertNext(oldMax, fin2, HOWMANY);
-        std::cout << i << " Old delete\n--------------------" << std::endl;
-        std::cout << oldMax.oldDeleteMax().toString() << std::endl << std::endl;*/
-    }
-
-
-    clock_t time = clock()-start;
-    std::cout << "Elapsed time = " << ((float) time)/CLOCKS_PER_SEC << std::endl;
+//    clock_t start = clock();
+//    int const DELETE_CT=20;
+//    int const PRINTSIZE=30;
+//    int const HOWMANY = 100;
+//
+//    PQHeap pqMax("MaxHeap",6000);
+//    PQHeap oldMax("OldMaxHeap",6000);
+//
+//    std::ifstream fin;
+//    fin.open("sixty1.txt");
+//    assert(fin);
+//
+//    std::ifstream fin2;
+//    fin2.open("sixty2.txt");
+//    assert(fin2);
+//
+//    for (int i = 0; i < 60; i++)
+//    {
+//        insertNext(pqMax, fin, HOWMANY);
+//        std::cout << i << " New delete\n--------------------" << std::endl;
+//        std::cout << pqMax.deleteMax().toString() << std::endl << std::endl;
+//        /*
+//        insertNext(oldMax, fin2, HOWMANY);
+//        std::cout << i << " Old delete\n--------------------" << std::endl;
+//        std::cout << oldMax.oldDeleteMax().toString() << std::endl << std::endl;*/
+//    }
+//
+//
+//    clock_t time = clock()-start;
+//    std::cout << "Elapsed time = " << ((float) time)/CLOCKS_PER_SEC << std::endl;
     return 0;
 }
 
@@ -81,9 +81,18 @@ void insertLeft(bool readLeft)
     }
 }
 
-void insertMed(PQ & pq,std::ifstream & fin,int limit)
+void insertMed(bool readMed)
 {
-    if (limit ==0)
+    Median myMedian;
+    std::ifstream fin("Prog5In.txt");
+    if (!fin)
+    {
+        std::cout << "File not found :(" << std::endl;
+        exit(-1);
+    }
+    
+    int limit = 499; //change this to the sample size you want
+    if (limit == 0)
     {
         limit = std::numeric_limits<int>::max();
     }
@@ -94,9 +103,15 @@ void insertMed(PQ & pq,std::ifstream & fin,int limit)
         fin >> word >> ct;
         //std::cout << "inserting " << word << ct << std::endl;
         ItemType item(word, ct);
-        pq.insert(item);
+        myMedian.insert(item);
     }
-    
+    if(readMed == true)
+    {
+        std::cout << "Final Median: ";
+        myMedian.toString();
+        std::cout << "maxHeap size: " << myMedian.maxHeap.size << std::endl;
+        std::cout << "minHeap size: " << myMedian.minHeap.size << std::endl;
+    }
 }
 
 void insertNext(PQ & pq,std::ifstream & fin,int limit)
