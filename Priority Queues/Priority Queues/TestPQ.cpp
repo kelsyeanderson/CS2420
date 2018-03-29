@@ -28,7 +28,7 @@ int main()
     
     bool readPQ = false; //change to true to print pqLimit number of max ItemTypes removed from PQ heap
     bool readLeft = false; //change to true to print the leftist tree
-    bool readMed = true; //change to true to print final median with max and min heap sizes
+    bool readMed = true; //change to true to print every hundren medians and final median with it's max and min heap sizes
     
     PQHeap pqHeap = createPqheap(readPQ, pqLimit, fileToReadIn);
     LeftistHeap leftHeap = createLeft(readLeft, leftLimit, fileToReadIn);
@@ -71,7 +71,7 @@ LeftistHeap createLeft(bool readLeft, int limit, std::string txt)
     return leftist;
 }
 
-/*Creates a Median Heap from information in txt of limit size. Prints final median plus the max and min heap's size if readMed is true. Returns Median heap*/
+/*Creates a Median Heap from information in txt of limit size. Prints every hundred medians, the final median, plus the max and min heap's size if readMed is true. Returns Median heap*/
 Median createMed(bool readMed , int limit, std::string txt)
 {
     Median myMedian;
@@ -92,8 +92,13 @@ Median createMed(bool readMed , int limit, std::string txt)
     {
         fin >> word >> ct;
         //std::cout << "inserting " << word << ct << std::endl;
-        ItemType item(word, ct);
-        myMedian.insert(item);
+        ItemType newVal(word, ct);
+        myMedian.insert(newVal);
+        if(readMed == true && i%100 == 0)
+        {
+            std::cout << i << ": ";
+            myMedian.toString();
+        }
     }
     if(readMed == true)
     {
