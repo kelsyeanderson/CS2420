@@ -25,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		7A24F1F7206ADB5B00CD81DB /* LeftistHeap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LeftistHeap.hpp; sourceTree = "<group>"; };
+		7A982D62206C683E003DCF87 /* Median.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Median.hpp; sourceTree = "<group>"; };
 		7AB13DD12066E0D800149DEF /* Priority Queues */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Priority Queues"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB13DDB2066E15500149DEF /* TestPQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestPQ.cpp; sourceTree = "<group>"; };
 		7AB13DDD2066E15900149DEF /* PQHeap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PQHeap.cpp; path = "/Users/kelsyeanderson/Desktop/Github/CS2420/Priority Queues/Priority Queues/PQHeap.cpp"; sourceTree = "<absolute>"; };
@@ -65,11 +66,12 @@
 			isa = PBXGroup;
 			children = (
 				7AB13DE02066E15F00149DEF /* Node.h */,
-				7A24F1F7206ADB5B00CD81DB /* LeftistHeap.hpp */,
 				7AB13DDF2066E15D00149DEF /* ItemType.h */,
 				7AB13DE22066E17D00149DEF /* PQ.h */,
 				7AB13DE12066E16100149DEF /* PQHeap.h */,
 				7AB13DDD2066E15900149DEF /* PQHeap.cpp */,
+				7A24F1F7206ADB5B00CD81DB /* LeftistHeap.hpp */,
+				7A982D62206C683E003DCF87 /* Median.hpp */,
 				7AB13DDB2066E15500149DEF /* TestPQ.cpp */,
 			);
 			path = "Priority Queues";

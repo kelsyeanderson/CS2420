@@ -5,9 +5,11 @@
 #include <fstream>
 #include <iostream>
 #include "Node.h"
+#include "Median.hpp"
 
 //Insert limit elements of the file fin into heap.
 void insertLeft(bool readLeft);
+void insertMed(PQ & pq,std::ifstream & fin,int limit);
 void insertNext(PQ & pq,std::ifstream & fin,int limit=0);
 
 int main()
@@ -79,6 +81,24 @@ void insertLeft(bool readLeft)
     }
 }
 
+void insertMed(PQ & pq,std::ifstream & fin,int limit)
+{
+    if (limit ==0)
+    {
+        limit = std::numeric_limits<int>::max();
+    }
+    std::string word;
+    int ct;
+    for (int i =0; i <= limit && !fin.eof(); i++)
+    {
+        fin >> word >> ct;
+        //std::cout << "inserting " << word << ct << std::endl;
+        ItemType item(word, ct);
+        pq.insert(item);
+    }
+    
+}
+
 void insertNext(PQ & pq,std::ifstream & fin,int limit)
 {
     if (limit ==0)
@@ -96,4 +116,5 @@ void insertNext(PQ & pq,std::ifstream & fin,int limit)
     }
 
 }
+
 
