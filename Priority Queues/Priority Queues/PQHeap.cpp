@@ -26,7 +26,7 @@ void PQHeap::insert(ItemType &newVal)
 	size++;
 }
 
-/*delete max for 4 kids instead of 2*/
+/*delete max for whatever number of kids are assigned*/
 ItemType PQHeap::deleteMax( )
 {
     if (size==0)
@@ -126,6 +126,7 @@ std::string PQHeap::toString(int maxSize) const
 }
 
 
+/*finds and returns the child with the largest priority. Works for whatever number of kids you have*/
 int PQHeap::getBestKid(int hole, int size)
 {
     int bestVal = (KIDS * hole) + 1;

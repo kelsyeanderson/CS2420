@@ -1,6 +1,8 @@
 
 #ifndef NODE_H
 #define NODE_H
+#include "ItemType.h"
+
 class Node
 {
 public:

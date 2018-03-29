@@ -30,6 +30,7 @@ private:
 Median::Median():
     m_med("", -1), minHeap(), maxHeap("MaxHeap",6000) {}
 
+/*initializes the median if heap is empty. Inserts the value into max or min heap depending on if the priority of the newValue is larger or smaller than the current median priority*/
 void Median::insert(ItemType newValue)
 {
     if (m_med.priority == -1)
@@ -47,6 +48,7 @@ void Median::insert(ItemType newValue)
     balance();
 }
 
+/*checks if one tree is more than 1 size bigger than the other. If true, it rebalances by inserting the current median into the smaller heap and pulling whatever is at the top out of the bigger heap*/
 void Median::balance()
 {
     if((minHeap.size - 1) > maxHeap.size) //minHeap is greater than maxHeap
@@ -67,6 +69,7 @@ void Median::balance()
     }
 }
 
+/*reassigns the median to whichever ItemType is at the top of the heap in max or min. Chooses which heap to take from based on which is bigger. returns previous median */
 ItemType Median::removeMed()
 {
     ItemType toReturn = m_med;
@@ -85,6 +88,7 @@ ItemType Median::removeMed()
     return toReturn;
 }
 
+/*prints the word and priority of median*/
 void Median::toString()
 {
     std::cout << "[" << m_med.word << ", " << m_med.priority << "]" << std::endl;

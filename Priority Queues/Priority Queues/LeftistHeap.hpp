@@ -18,12 +18,11 @@ class LeftistHeap
 {
 public:
     int size = 0;
+    
     Node* getMin() {return m_root;}; //returns the pointer to the min ItemType in heap
     void insert(ItemType input); //inserts an item into the tree
     ItemType removeMin(); //removes the root from the tree
-    void merge(Node* heap2); //helper function for merging 2 Leftist heaps
-    void toString()  {toString(m_root," ",0);}; //helper function for to String. Use at your own risk
-    void toString(Node* ptr, std::string indent, int currdepth, int depth = std::numeric_limits<int>::max()); //outputs Leftist Heap
+    void toString()  {toString(m_root," ",0);}; //helper function for to String
     
 private:
     Node* m_root = nullptr;
@@ -32,6 +31,7 @@ private:
     void setAllNullHeight(Node* & ptr); //recursive function to set all null heights
     Node* merge(Node* &heap1, Node* &heap2); // merges two heaps together
     bool notLeftist(Node* ptr); //returns true if not a leftist heap
+    void toString(Node* ptr, std::string indent, int currdepth, int depth = std::numeric_limits<int>::max()); //outputs Leftist Heap
 };
 
 /*helper function for other setAllNullHeight function. Checks if root is null*/
@@ -70,13 +70,6 @@ void LeftistHeap::insert(ItemType input)
     m_root = merge(temp, m_root);
     setAllNullHeight();
 }
-
-///*helper function for merge. Merges current leftist heap with inputed leftist heap*/
-//void LeftistHeap::merge(Node* heap2)
-//{
-//    this->m_root = merge(this->m_root, heap2);
-//    setAllNullHeight();
-//}
 
 /*Combines two heaps based on which root is smaller*/
 Node* LeftistHeap::merge(Node* & heap1, Node* & heap2)
@@ -136,7 +129,7 @@ bool LeftistHeap::notLeftist(Node* ptr)
     return notLeftist(ptr->right) && notLeftist(ptr->left);
 }
 
-/*merges the left and right child of the root to remove the min*/
+/*merges the left and right child of the root to remove the min. Returns root of previous heap*/
 ItemType LeftistHeap::removeMin()
 {
     size--;
