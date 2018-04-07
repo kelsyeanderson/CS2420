@@ -10,6 +10,7 @@
 #define Union_hpp
 
 #include <stdio.h>
+#include <iostream>
 #include "Node.hpp"
 
 class Union
@@ -23,12 +24,14 @@ public:
     m_days(d), m_unions(u), m_numFind(f) {}
     
     void unionByHeight(Node* root1, Node* root2);
+    void toString(Node* ptr);
     
 private:
     Node* find(Node* root1);
     
 };
 
+/*unionizes two ptrs by height*/
 void Union::unionByHeight(Node* ptr1, Node* ptr2)
 {
     m_days++;
@@ -58,6 +61,7 @@ void Union::unionByHeight(Node* ptr1, Node* ptr2)
     }
 }
 
+/*finds root and then sets the Nodes's parent (from the first ptr up until the root) to root*/
 Node* Union::find(Node* ptr)
 {
     if (ptr->m_height < 0)
