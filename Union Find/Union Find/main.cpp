@@ -10,9 +10,9 @@ void unionizeForNumSize(int size, bool printEvery, bool print);
 
 int main()
 {
-    const int size = 1000;
-    bool printEvery = false;
-    bool print = true;
+    const int size = 1000; //changes the size of the array
+    bool printEvery = false; //set to true if you want to see every value after it has been unionized
+    bool print = true; //set to true to print number of unions, finds, and days
     unionizeForNumSize(size, printEvery, print);
     
     return 0;
