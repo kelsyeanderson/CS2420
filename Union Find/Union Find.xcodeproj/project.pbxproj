@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A25C075207936170095BB24 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A25C074207936170095BB24 /* main.cpp */; };
-		7A25C07D207936490095BB24 /* Union.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A25C07B207936490095BB24 /* Union.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		7A25C071207936170095BB24 /* Union Find */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Union Find"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A25C074207936170095BB24 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		7A25C07B207936490095BB24 /* Union.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Union.cpp; sourceTree = "<group>"; };
 		7A25C07C207936490095BB24 /* Union.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Union.hpp; sourceTree = "<group>"; };
 		7A25C07E20793A8B0095BB24 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,10 +59,9 @@
 		7A25C073207936170095BB24 /* Union Find */ = {
 			isa = PBXGroup;
 			children = (
-				7A25C074207936170095BB24 /* main.cpp */,
 				7A25C07E20793A8B0095BB24 /* Node.hpp */,
 				7A25C07C207936490095BB24 /* Union.hpp */,
-				7A25C07B207936490095BB24 /* Union.cpp */,
+				7A25C074207936170095BB24 /* main.cpp */,
 			);
 			path = "Union Find";
 			sourceTree = "<group>";
@@ -126,7 +123,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A25C075207936170095BB24 /* main.cpp in Sources */,
-				7A25C07D207936490095BB24 /* Union.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

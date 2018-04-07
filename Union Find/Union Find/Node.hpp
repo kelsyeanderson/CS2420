@@ -16,6 +16,8 @@ public:
     Node* m_parent;
     int m_height;
     
+    Node(int v, Node* p = nullptr, int h= -1):
+    m_value(v), m_parent(p), m_height(h) {}
     
 private:
     
