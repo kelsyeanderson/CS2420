@@ -24,7 +24,7 @@ public:
     m_days(d), m_unions(u), m_numFind(f) {}
     
     void unionByHeight(Node* root1, Node* root2);
-    void toString(Node* ptr);
+    void unionizeForNumSize(int size, bool print);
     
 private:
     Node* find(Node* root1);
@@ -36,9 +36,7 @@ void Union::unionByHeight(Node* ptr1, Node* ptr2)
 {
     m_days++;
     Node* root1 = find(ptr1);
-    m_numFind++;
     Node* root2 = find(ptr2);
-    m_numFind++;
     if(root1->m_value == root2->m_value)
     {
         return;
@@ -64,6 +62,7 @@ void Union::unionByHeight(Node* ptr1, Node* ptr2)
 /*finds root and then sets the Nodes's parent (from the first ptr up until the root) to root*/
 Node* Union::find(Node* ptr)
 {
+    m_numFind++;
     if (ptr->m_height < 0)
     {
         return ptr;
@@ -73,6 +72,42 @@ Node* Union::find(Node* ptr)
     ptr->m_parent = root;
     
     return root;
+}
+
+/*This function fills an array of length size with Node* whose values are numbers 0 - size. It then randomly unionizes the Nodes in the array with each other until they are all friends. If print is true it will print the number of unions, finds and days after they have all been unionized*/
+void Union::unionizeForNumSize(int size, bool print)
+{
+    Node* myArray[size];
+    srand(int(time(NULL)));
+    
+    for(int i = 0; i < size; i++)
+    {
+        Node* temp = new Node(i);
+        myArray[i] = temp;
+    }
+    
+    while(m_unions < size - 1)
+    {
+        int rand1 = rand() % size;
+        int rand2 = rand() % size;
+        unionByHeight(myArray[rand1], myArray[rand2]);
+        
+        /*uncomment to help debug*/
+        
+//        std::cout << "-----------Rand-1--------------" << std::endl;
+//        std::cout << "First input [v:h]: [" << myArray[rand1]->m_value << ":" << myArray[rand1]->m_height << "]\n";
+//        std::cout << "-------------------------" << std::endl;
+//        std::cout << "-----------Rand-2--------------" << std::endl;
+//        std::cout << "Second input [v: h]: [" << myArray[rand2]->m_value << ":" << myArray[rand2]->m_height << "]\n";
+//        std::cout << "-------------------------\n\n";
+    }
+    
+    if(print == true)
+    {
+        std::cout << "Number of Unions: " << m_unions << std::endl;
+        std::cout << "Number of Finds: " << m_numFind << std::endl;
+        std::cout << "Number of Days: " << m_days << std::endl;
+    }
 }
 
 
