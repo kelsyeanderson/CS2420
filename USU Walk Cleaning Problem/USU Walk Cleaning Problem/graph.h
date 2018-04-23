@@ -234,17 +234,13 @@ void Graph::findCycles()
                 std::cerr << "findNextNode broke" << std::endl;
                 exit(-1);
             }
-            std::cout << toString(nextNode, currNode, currID);
             currCycleStr.push_back(toString(nextNode, currNode, currID));
             currCycleNum.push_back(nextNode);
             currNode = nextNode;
         }
-        std::cout << std::endl;
         update(currID, currCycleStr, currCycleNum, nextNode);
         currCycleNum.erase(currCycleNum.begin(), currCycleNum.end());
     }
-    std::cout << std::endl;
-    printMat();
 }
 
 
@@ -286,6 +282,24 @@ int Graph::nextEdge(int currNode, vector<int>& startOfCycles)
     return -1;
 }
 
+void Graph::computeTour(std::vector<int> startOfCycles, int currRow)
+{
+    for(int currCol = 0; currCol < allCyclesNum[currRow].size(); currCol++)
+    {
+        int currNode = allCyclesNum[currRow][currCol];
+        int newStart = nextEdge(currNode, startOfCycles);
+        if(newStart != -1)
+        {
+            computeTour(startOfCycles, newStart);
+        }
+        else
+        {
+            tour += allCyclesNum[currRow][currCol] + 'A';
+            tour += " ";
+        }
+    }
+}
+
 void Graph::computeTour(std::ostream& output)
 {
     findCycles();
@@ -298,27 +312,6 @@ void Graph::computeTour(std::ostream& output)
     computeTour(startOfCycles, currRow);
     
     output << tour << std::endl;
-}
-
-void Graph::computeTour(std::vector<int> startOfCycles, int currRow)
-{
-    for(int currCol = 0; currCol < allCyclesNum[currRow].size(); currCol++)
-    {
-        int currNode = allCyclesNum[currRow][currCol];
-        int newStart = nextEdge(currNode, startOfCycles);
-        if(newStart != -1)
-        {
-            std::cout << "new cycle" << std::endl;
-            computeTour(startOfCycles, newStart);
-            tour += allCyclesStr[currRow][currCol];
-            std::cout << allCyclesStr[currRow][currCol];
-        }
-        else
-        {
-            tour += allCyclesStr[currRow][currCol];
-            std::cout << allCyclesStr[currRow][currCol];
-        }
-    }
 }
 
 
