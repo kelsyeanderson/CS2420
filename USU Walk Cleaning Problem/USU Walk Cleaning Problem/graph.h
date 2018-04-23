@@ -234,7 +234,7 @@ void Graph::findCycles()
                 std::cerr << "findNextNode broke" << std::endl;
                 exit(-1);
             }
-            currCycleStr.push_back(toString(nextNode, currNode, currID));
+//            std::cout << toString(nextNode, currNode, currID);
             currCycleNum.push_back(nextNode);
             currNode = nextNode;
         }
@@ -305,13 +305,24 @@ void Graph::computeTour(std::ostream& output)
     findCycles();
     if(alreadyDone(output)) return;
     
+    for(int i = 0; i < allCyclesNum.size(); i++)
+    {
+        output << "Cycle " << i << ": ";
+        for (int j = 0; j < allCyclesNum[i].size(); j++)
+        {
+            output << (allCyclesNum[i][j] + 'A') << " ";
+        }
+        output << std::endl;
+    }
+    printMat(output);
+    
     std::vector<int> startOfCycles;
     computeStarts(startOfCycles);
     
     int currRow = 0;
     computeTour(startOfCycles, currRow);
     
-    output << tour << std::endl;
+    output << "Tour: " << tour << std::endl;
 }
 
 
