@@ -16,14 +16,14 @@ int main ()
     g.findCycles();
 //    g.computeTour(fout);  // If I want the output to appear on console, I just make the parameter "cout"
 //
-    std::cout << "\n\n------------------g1----------------------" << std::endl;
-    Graph g1("prog7B.txt", cout);
-    g1.findCycles();
+//    std::cout << "\n\n------------------g1----------------------" << std::endl;
+//    Graph g1("prog7B.txt", cout);
+//    g1.findCycles();
 //    g1.computeTour(fout);
 //
-    std::cout << "\n\n------------------g2----------------------" << std::endl;
-    Graph g2("prog7C.txt",cout);
-    g2.findCycles();
+//    std::cout << "\n\n------------------g2----------------------" << std::endl;
+//    Graph g2("prog7C.txt",cout);
+//    g2.findCycles();
 //    g2.computeTour(cout);
 //    
     return 0;

@@ -18,12 +18,16 @@ class Graph
 public:
     int numNodes;
     int numEdges;
+    std::string tour;
+    std::vector<int> edgesPerNode;
     std::vector<std::vector<int>> adjMat;
-    std::vector<std::vector<std::string>> allCycles;
+    std::vector<std::vector<std::string>> allCyclesStr;
+    std::vector<std::vector<int>> allCyclesNum;
     
-    Graph(std::string txtName, std::ostream& fout);
+    Graph(std::string txtName, std::ostream& output);
     void printMat(std::ostream & output = std::cout);
     void findCycles();
+    void computeTour(std::ostream& output);
     
 private:
     void eulerTourCheck();
@@ -31,8 +35,9 @@ private:
     bool isAdjMatDone();
     int findRow();
     int findNextNode(int currRow, int currID);
-    void update(int& currID, vector<std::string>& currCycle, int& nextNode);
+    void update(int& currID, vector<std::string>& currCycle, vector<int>& currCycleNum, int& nextNode);
     std::string toString(int toNode, int fromNode, int cycleID);
+    int getInt(char let);
     
 };
 
@@ -52,9 +57,9 @@ Graph::Graph(std::string txtName, std::ostream& output)
     inFile >> numNodes;
     inFile >> numEdges;
     
-    setMat(inFile);
-    eulerTourCheck();
-    printMat(output);
+    setMat(inFile);   //sets the matrix based on the input from the file
+    eulerTourCheck(); //checks that it has a euler tour
+    printMat(output); //prints the matrix into whatever ostream is provided
 }
 
 /*sets the matrix given the input from the txt file*/
@@ -85,17 +90,19 @@ void Graph::setMat(std::ifstream& inFile)
     }
 }
 
-/*checks that there are an even number of edges for each node*/
+/*checks that there are an even number of edges for each node. Stores the number of edges per node in edgesPerNode vector while doing this*/
 void Graph::eulerTourCheck()
 {
     for(int i = 0; i < numNodes; i++)
     {
         int tempNumEdges = 0;
+        edgesPerNode.push_back(tempNumEdges);
         for(int j = 0; j < numNodes; j++)
         {
             if(adjMat[i][j] == -1)
             {
                 tempNumEdges++;
+                edgesPerNode[i]++;
             }
         }
         if((tempNumEdges % 2) != 0)
@@ -168,10 +175,12 @@ int Graph::findNextNode(int currRow, int currID)
 }
 
 /*incraments currID, puts currCycle into all*/
-void Graph::update(int& currID, vector<std::string>& currCycle, int& nextNode)
+void Graph::update(int& currID, vector<std::string>& currCycle, vector<int>& currCycleNum, int& nextNode)
 {
     currID++;
-    allCycles.push_back(currCycle);
+    allCyclesStr.push_back(currCycle);
+    allCyclesNum.push_back(currCycleNum);
+    currCycleNum.erase(currCycleNum.begin(), currCycleNum.end());
     currCycle.erase(currCycle.begin(), currCycle.end());
     nextNode = -1;
 }
@@ -181,7 +190,7 @@ std::string Graph::toString(int toNode, int fromNode, int cycleID)
     ostringstream os;  // allows string to act like stream to use stream operations
     char t = toNode + 'A';
     char f = fromNode + 'A';
-    os << "   "<<f << "-"<<t  << "(" << cycleID << ")" ;
+    os << f << "-"<<t  << "(" << cycleID << ")" << "   ";
     return os.str();
 }
 
@@ -189,7 +198,8 @@ void Graph::findCycles()
 {
     int currID = 1;
     int origNode;
-    std::vector<string> currCycle;
+    std::vector<string> currCycleStr;
+    std::vector<int> currCycleNum;
     int nextNode = -1;
     int currNode;
     while(!isAdjMatDone())
@@ -201,7 +211,7 @@ void Graph::findCycles()
             exit(-1);
         }
         currNode = origNode;
-        int count = 0;
+        currCycleNum.push_back(origNode);
         while(nextNode != origNode)
         {
             nextNode = findNextNode(currNode, currID);
@@ -210,26 +220,58 @@ void Graph::findCycles()
                 std::cerr << "findNextNode broke" << std::endl;
                 exit(-1);
             }
-            currCycle.push_back(toString(nextNode, currNode, currID));
-            std::cout << currCycle[count] << " ";
-            count++;
+            currCycleStr.push_back(toString(nextNode, currNode, currID));
+            currCycleNum.push_back(nextNode);
             currNode = nextNode;
         }
-        update(currID, currCycle, nextNode);
-
+        update(currID, currCycleStr, currCycleNum, nextNode);
     }
-    
-    for(int i = 0; i < allCycles.size(); i++)
-    {
-        for(int j = 0; j < allCycles[i].size(); j++)
-        {
-            std::cout << allCycles[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    std::cout << std::endl;
+    printMat();
 }
 
+int Graph::getInt(char let)
+{
+    return let - 'A';
+}
 
+void Graph::computeTour(std::ostream& output)
+{
+    std::vector<int> startOfCycles;
+    
+    for(int i = 0; i < allCyclesNum.size(); i++)
+    {
+        startOfCycles.push_back(allCyclesNum[i][0]);
+    }
+    
+    while(isAdjMatDone())
+    {
+        
+    }
+    
+    
+    
+    
+    
+//    int start = -1;
+//    for(int row = 0; row < allCyclesNum.size(); row++)
+//    {
+//        for(int col = 0; col < allCyclesNum[row].size(); col++)
+//        {
+//            for(int cycleStart = 0; cycleStart < startOfCycles.size(); cycleStart++)
+//            {
+//                if(allCyclesNum[row][col] == startOfCycles[cycleStart])
+//                {
+//                    start = cycleStart;
+//                }
+//            }
+//            if(start != -1)
+//            {
+//
+//            }
+//        }
+//    }
+}
 
 
 
