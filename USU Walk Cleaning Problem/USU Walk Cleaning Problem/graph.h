@@ -19,38 +19,34 @@ public:
     int numNodes;
     int numEdges;
     std::string tour;
-    std::vector<int> edgesPerNode;
     std::vector<std::vector<int>> adjMat;
-    std::vector<std::vector<int>> allCyclesNum;
-    std::vector<std::vector<std::string>> allCyclesStr;
+    std::vector<std::vector<int>> allCycles;
     
-    std::vector<bool> visitedCyc;
-    std::vector<std::vector<int>> nodeArray;
-    
-    Graph(std::string txtName, std::ostream& output);
-    void printMat(std::ostream & output = std::cout);
-    void findCycles();
-    void merge();
-    void computeTour(std::ostream& output);
+    Graph(std::string txtName, std::ostream& output); // constructor for Graph
+    void printMat(std::ostream & output = std::cout); //prints the current adjMat
+    void computeTour(std::ostream& output); //finds a path in the matrix that hits every edge exactly once
     
 private:
-    void eulerTourCheck();
-    void setMat(std::ifstream& inFile);
-    bool isAdjMatDone();
-    int findRow();
-    int findNextNode(int currRow, int currID);
-    void update(int& currID, vector<std::string>& currCycle, vector<int> currCycleNum, int& nextNode);
-    std::string toString(int toNode, int fromNode, int cycleID);
+    /*helper functions for constructor*/
+    void eulerTourCheck(); //checks that all the nodes have an even number of edges
+    void setMat(std::ifstream& inFile); //sets the adjMat based on the txt file
     
-    void merge(int cycleNum, int node);
-    void createNodeArray();
+    /*findCycles and helper functions*/
+    void findCycles(); //puts all the different cycles into allCyclesNum
+    bool isAdjMatDone(); //returns true if there are no -1s in the matrix
+    int findRow(); //finds the first row that has a -1 in it
+    int findNextNode(int currRow, int currID); //returns the column of the first -1 in a given row, sets those to currID in the matrix
+    void update(int& currID, vector<int>& currCycle, int& nextNode); //updates the currID, nextNode, and allCycles after a cycle run
+    std::string toString(int toNode, int fromNode, int cycleID); //creates a string ouput for two nodes
     
-    bool hitAllEdges();
-    int nextEdge(int currNode, vector<int>& startofCycles);
-    bool alreadyDone(std::ostream& output);
-    void computeStarts(std::vector<int>& startOfCycles);
-    
-    void computeTour(std::vector<int> startOfCycles, int currRow);
+    /*computeTour helper functions*/
+    void mergeCycles(std::vector<int> startOfCycles, int currRow); //recursively merges the cycles in allCycles
+    void mergeCycles(std::ostream& output = std::cout); //helper function for recursive merge function
+    std::vector<int> computeStarts(); //makes a vector that holds the first node in every cycle found in allCycles
+    int nextEdge(int currNode, vector<int>& startofCycles); //finds if the inputted node has a full cycle that goes off from it
+    bool alreadyDone(std::ostream& output = std::cout); //checks if the allCycles vector only has one cycle in it
+    void printCycles(std::ostream& output = std::cout); //prints all the cycles in the allCycles function
+
     
 };
 
@@ -109,13 +105,11 @@ void Graph::eulerTourCheck()
     for(int i = 0; i < numNodes; i++)
     {
         int tempNumEdges = 0;
-        edgesPerNode.push_back(tempNumEdges);
         for(int j = 0; j < numNodes; j++)
         {
             if(adjMat[i][j] == -1)
             {
                 tempNumEdges++;
-                edgesPerNode[i]++;
             }
         }
         if((tempNumEdges % 2) != 0)
@@ -135,6 +129,46 @@ void Graph:: printMat(std::ostream& output)
             output << setw(3) << adjMat[i][j];
         }
         output << endl;
+    }
+}
+
+/*--------------------------findCycles and it's helper functions--------------------------------------*/
+
+/*finds cycles that combined hit every edge in the matrix. Puts the different cycles in the allCycles vector*/
+void Graph::findCycles()
+{
+    int currID = 1;
+    int origNode;
+    std::vector<int> currCycle;
+    int nextNode = -1;
+    int currNode;
+    
+    /*loops throught the adjMat until it has grabbed all the edges*/
+    while(!isAdjMatDone())
+    {
+        origNode = findRow();
+        if(origNode == -1)
+        {
+            std::cerr << "findRow broke" << std::endl;
+            exit(-1);
+        }
+        currNode = origNode;
+        currCycle.push_back(origNode);
+        
+        /*loops until it creates a full cycle*/
+        while(nextNode != origNode)
+        {
+            nextNode = findNextNode(currNode, currID);
+            if(nextNode == -1)
+            {
+                std::cerr << "findNextNode broke" << std::endl;
+                exit(-1);
+            }
+//            std::cout << toString(nextNode, currNode, currID); //uncomment to check for different cycles
+            currCycle.push_back(nextNode);
+            currNode = nextNode;
+        }
+        update(currID, currCycle, nextNode);
     }
 }
 
@@ -187,16 +221,16 @@ int Graph::findNextNode(int currRow, int currID)
     return -1;
 }
 
-/*incraments currID, puts currCycle into all*/
-void Graph::update(int& currID, vector<std::string>& currCycle, vector<int> currCycleNum, int& nextNode)
+/*incraments currID, puts currCycle into allCyclesNum, erases the currCycle, and sets nextNode to -1*/
+void Graph::update(int& currID, vector<int>& currCycle, int& nextNode)
 {
     currID++;
-    allCyclesStr.push_back(currCycle);
-    allCyclesNum.push_back(currCycleNum);
+    allCycles.push_back(currCycle);
     currCycle.erase(currCycle.begin(), currCycle.end());
     nextNode = -1;
 }
 
+/*converts the nodes into an output that shows the where the path is going and what the cycle ID is*/
 std::string Graph::toString(int toNode, int fromNode, int cycleID)
 {
     ostringstream os;  // allows string to act like stream to use stream operations
@@ -206,52 +240,72 @@ std::string Graph::toString(int toNode, int fromNode, int cycleID)
     return os.str();
 }
 
-void Graph::findCycles()
+/*------------------------------------computeTour and it's helper functions--------------------------------------------*/
+
+/*calls the findCycles function and mergeCycles functions*/
+void Graph::computeTour(std::ostream& output)
 {
-    int currID = 1;
-    int origNode;
-    std::vector<string> currCycleStr;
-    std::vector<int> currCycleNum;
-    int nextNode = -1;
-    int currNode;
+    findCycles();
+    mergeCycles(output);
+}
+
+/*checks if findCycles only found one cycle, so it doesn't need to find another, then puts the cycle/cycles in the output. It then prints the matrix and makes a vector that holds the first node in each cycle. Finally it calls the merge cycles function and puts the tour into the output*/
+void Graph::mergeCycles(std::ostream& output)
+{
+    if(alreadyDone(output)) return;
+    else printCycles(output);
+    printMat(output);
     
-    /*problems to fix. finds cycles, but not necesarily the smallest*/
-    while(!isAdjMatDone())
+    std::vector<int> startOfCycles = computeStarts();
+    
+    mergeCycles(startOfCycles, 0);
+    
+    output << "Tour: " << tour << std::endl;
+}
+
+/*recursively merges the smaller cycles into a tour. Appends the path onto the string tour*/
+void Graph::mergeCycles(std::vector<int> startOfCycles, int currRow)
+{
+    for(int currCol = 0; currCol < allCycles[currRow].size(); currCol++)
     {
-        origNode = findRow();
-        if(origNode == -1)
+        int currNode = allCycles[currRow][currCol];
+        int newStart = nextEdge(currNode, startOfCycles);
+        if(newStart != -1)
         {
-            std::cerr << "findRow broke" << std::endl;
-            exit(-1);
+            mergeCycles(startOfCycles, newStart);
         }
-        currNode = origNode;
-        currCycleNum.push_back(origNode);
-        while(nextNode != origNode)
+        else
         {
-            nextNode = findNextNode(currNode, currID);
-            if(nextNode == -1)
-            {
-                std::cerr << "findNextNode broke" << std::endl;
-                exit(-1);
-            }
-//            std::cout << toString(nextNode, currNode, currID);
-            currCycleNum.push_back(nextNode);
-            currNode = nextNode;
+            tour += allCycles[currRow][currCol] + 'A';
+            tour += " ";
         }
-        update(currID, currCycleStr, currCycleNum, nextNode);
-        currCycleNum.erase(currCycleNum.begin(), currCycleNum.end());
     }
 }
 
+/*switches the cycles into letters and then puts them into output*/
+void Graph::printCycles(std::ostream& output)
+{
+    for(int i = 0; i < allCycles.size(); i++)
+    {
+        output << "Cycle " << i << ": ";
+        for (int j = 0; j < allCycles[i].size(); j++)
+        {
+            char tempLetter = allCycles[i][j] + 'A';
+            output << tempLetter << " ";
+        }
+        output << std::endl;
+    }
+}
 
 /*if there is only one cycle, it outputs the cycle*/
 bool Graph::alreadyDone(std::ostream& output)
 {
-    if(allCyclesStr.size() == 1)
+    if(allCycles.size() == 1)
     {
-        for(int i = 0; i < allCyclesStr[0].size(); i++)
+        for(int i = 0; i < allCycles[0].size(); i++)
         {
-            output << allCyclesStr[0][i];
+            char tempLetter = allCycles[0][i] + 'A';
+            output << tempLetter << " ";
         }
         output << std::endl;
         return true;
@@ -260,12 +314,14 @@ bool Graph::alreadyDone(std::ostream& output)
 }
 
 /*puts the start of each cycle into the vector*/
-void Graph::computeStarts(std::vector<int>& startOfCycles)
+std::vector<int> Graph::computeStarts()
 {
-    for(int i = 0; i < allCyclesNum.size(); i++)
+    std::vector<int> startOfCycles;
+    for(int i = 0; i < allCycles.size(); i++)
     {
-        startOfCycles.push_back(allCyclesNum[i][0]);
+        startOfCycles.push_back(allCycles[i][0]);
     }
+    return startOfCycles;
 }
 
 /*checks to see if the currNode has a cycle that goes off of it. Returns the row the cycle starts on if found and the currNode if not found*/
@@ -282,48 +338,7 @@ int Graph::nextEdge(int currNode, vector<int>& startOfCycles)
     return -1;
 }
 
-void Graph::computeTour(std::vector<int> startOfCycles, int currRow)
-{
-    for(int currCol = 0; currCol < allCyclesNum[currRow].size(); currCol++)
-    {
-        int currNode = allCyclesNum[currRow][currCol];
-        int newStart = nextEdge(currNode, startOfCycles);
-        if(newStart != -1)
-        {
-            computeTour(startOfCycles, newStart);
-        }
-        else
-        {
-            tour += allCyclesNum[currRow][currCol] + 'A';
-            tour += " ";
-        }
-    }
-}
 
-void Graph::computeTour(std::ostream& output)
-{
-    findCycles();
-    if(alreadyDone(output)) return;
-    
-    for(int i = 0; i < allCyclesNum.size(); i++)
-    {
-        output << "Cycle " << i << ": ";
-        for (int j = 0; j < allCyclesNum[i].size(); j++)
-        {
-            output << (allCyclesNum[i][j] + 'A') << " ";
-        }
-        output << std::endl;
-    }
-    printMat(output);
-    
-    std::vector<int> startOfCycles;
-    computeStarts(startOfCycles);
-    
-    int currRow = 0;
-    computeTour(startOfCycles, currRow);
-    
-    output << "Tour: " << tour << std::endl;
-}
 
 
 
